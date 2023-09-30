@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "myid.shizuka.rpl"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "myid.shizuka.rpl"
@@ -50,6 +51,9 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("androidx.compose.material3:material3-window-size-class:1.1.2")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha12")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha12")
     implementation("androidx.core:core-ktx:1.9.0")
@@ -60,6 +64,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+    implementation("androidx.appcompat:appcompat:1.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
