@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883185560602",
+    "project_id": "quiz-rpl",
+    "storage_bucket": "quiz-rpl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883185560602:android:9df942a14403bf8636f5a3",
+        "android_client_info": {
+          "package_name": "myid.shizuka.rpl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMoXhmkxcmeMQUI97wEnOlVYLaZbOLM8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
