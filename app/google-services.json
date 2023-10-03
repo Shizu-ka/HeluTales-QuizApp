@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "883185560602",
+    "firebase_url": "https://quiz-rpl-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "quiz-rpl",
     "storage_bucket": "quiz-rpl.appspot.com"
   },
