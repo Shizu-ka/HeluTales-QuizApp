@@ -24,7 +24,6 @@ class QuestionActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("timii", "onCreate called")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         setUpFirestore()
@@ -57,7 +56,9 @@ class QuestionActivity : AppCompatActivity() {
 
     private fun setUpFirestore() {
         val firestore = FirebaseFirestore.getInstance()
-        firestore.collection("quizzes").whereEqualTo("title", "11-12-2023")
+        val quizTitle = intent.getStringExtra("Title")
+        if (quizTitle != null) {
+            firestore.collection("quizzes").whereEqualTo("title", quizTitle)
                 .get()
                 .addOnSuccessListener {
                     if (it != null && !it.isEmpty) {
@@ -66,7 +67,7 @@ class QuestionActivity : AppCompatActivity() {
                         bindViews()
                     }
                 }
-
+        }
     }
 
     private fun bindViews() {
