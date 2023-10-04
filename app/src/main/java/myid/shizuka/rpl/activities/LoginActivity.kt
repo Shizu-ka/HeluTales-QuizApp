@@ -8,11 +8,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.IgnoreExtraProperties
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
 
 class LoginActivity : AppCompatActivity() {
 
     lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +48,9 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
             return
         }
-
+//        database.child("users").child(email).child("email").setValue(email)
+//        database.child("users").child(password).child("password").setValue(password)
+        writeNewUser(email,password)
         firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this) {
             if (it.isSuccessful) {
                 Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
@@ -55,5 +62,19 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
             }
         }
+
+    }
+    @IgnoreExtraProperties
+    data class User(val email: String? = null, val password: String? = null) {
+    }
+    fun writeNewUser(email: String, password: String) {
+        val databaseR = Firebase.database.reference
+        val userId = databaseR.child("users").push().key ?: ""
+
+        val user = User(email, password)
+
+        databaseR.child("users").child(userId).setValue(user)
+//        database.child("users").child(email).setValue(user)
+//        database.child("password").child(password).setValue(password)
     }
 }
