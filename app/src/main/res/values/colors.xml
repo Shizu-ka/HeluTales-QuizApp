@@ -14,4 +14,7 @@
     <color name="colorPrimaryText">#18206F</color>
     <color name="colorPrimaryTextOpaque">#18206F</color>
     <color name="color_primary">#111750</color>
+    <color name="colorAccent">#E91E63</color>
+    <color name="colorPrimary">#18206F</color>
+    <color name="colorPrimaryDark">#11164E</color>
 </resources>
