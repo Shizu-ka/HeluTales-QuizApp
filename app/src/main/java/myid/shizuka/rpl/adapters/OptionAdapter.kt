@@ -41,5 +41,6 @@ class OptionAdapter(val context: Context, val question: Question) :
 
     override fun getItemCount(): Int {
         return options.size
+
     }
 }
