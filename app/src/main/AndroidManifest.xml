@@ -33,6 +33,10 @@
             android:exported="true"
             android:theme="@style/Theme.Rpl">
         </activity>
+        <activity android:name=".activities.ProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.RplNoActionBar">
+        </activity>
 
         <activity android:name=".activities.LoginIntro"
             android:exported="true"
