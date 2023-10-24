@@ -44,9 +44,11 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
+                    android:textSize="35sp"
                     android:id="@+id/textView"
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="match_parent"
@@ -58,10 +60,11 @@
                     android:textColor="@color/colorPrimaryText"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/etEmailAddress"
+                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:textSize="20sp"
                     android:id="@+id/textView2"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
@@ -73,7 +76,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <EditText
-                    android:id="@+id/etEmailAddress"
+                    android:id="@+id/etUEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -87,6 +90,59 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+                <EditText
+                    android:id="@+id/etUNewEmailAddress"
+                    android:layout_marginTop="20dp"
+                    android:minHeight="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_backgroud"
+                    android:ems="10"
+                    android:hint="New Email Address"
+                    android:inputType="textEmailAddress"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etUEmailAddress" />
+
+                <EditText
+                    android:id="@+id/etUOldPassword"
+                    android:layout_marginTop="20dp"
+                    android:minHeight="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_backgroud"
+                    android:ems="10"
+                    android:hint="Old Password"
+                    android:inputType="textPassword"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/etUNewEmailAddress" />
+
+                <EditText
+                    android:id="@+id/etUNewPassword"
+                    android:layout_marginTop="20dp"
+                    android:minHeight="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_backgroud"
+                    android:ems="10"
+                    android:hint="New Password"
+                    android:inputType="textPassword"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/etUOldPassword" />
+
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_primary"
+                    android:text="Update Profile"
+                    android:textColor="@color/colorPrimaryButton"
+                    app:layout_constraintTop_toBottomOf="@+id/etUNewPassword"
+                    tools:layout_editor_absoluteX="32dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
