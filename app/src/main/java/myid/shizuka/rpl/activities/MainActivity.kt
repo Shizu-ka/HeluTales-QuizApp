@@ -1,5 +1,7 @@
 package myid.shizuka.rpl.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -11,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.QuizAdapter
@@ -66,12 +69,40 @@ class MainActivity : AppCompatActivity() {
     fun setUpDrawerLayout() {
         val appBar = findViewById<MaterialToolbar>(R.id.appBar)
         val mainDrawer = findViewById<DrawerLayout>(R.id.mainDrawer)
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
         setSupportActionBar(appBar)
         actionBarDrawerToggle = ActionBarDrawerToggle(this, mainDrawer,
             R.string.app_name,
             R.string.app_name
         )
         actionBarDrawerToggle.syncState()
+        val menu = navigationView.menu
+        val highlightedItem = menu.findItem(R.id.mainPage)
+        highlightedItem.isChecked = true
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.profilePage -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.followUs -> {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
+                    startActivity(browserIntent)
+                }
+                R.id.rateUs -> {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
+                    startActivity(browserIntent)
+                }
+            }
+            mainDrawer.closeDrawers()
+            true
+        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -80,4 +111,9 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        actionBarDrawerToggle.syncState()
+    }
+
 }
