@@ -35,20 +35,20 @@
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/quizLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
                 android:orientation="vertical"
-                >
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp">
 
                 <TextView
-                    android:textSize="35sp"
                     android:id="@+id/textView"
                     style="@style/TextAppearance.AppCompat.Title"
                     android:layout_width="match_parent"
@@ -58,13 +58,13 @@
                     android:layout_marginBottom="598dp"
                     android:text="Stay Connected"
                     android:textColor="@color/colorPrimaryText"
+                    android:textSize="35sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:textSize="20sp"
                     android:id="@+id/textView2"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
@@ -72,6 +72,7 @@
                     android:maxEms="16"
                     android:text="Enter your email address and password to get access to your account"
                     android:textColor="@color/colorPrimaryText"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/textView"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -90,16 +91,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+                <TextView
+                    android:id="@+id/etUNewEmailAddressError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/etUNewEmailAddress"
+                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/etUEmailAddress" />
+
                 <EditText
                     android:id="@+id/etUNewEmailAddress"
-                    android:layout_marginTop="20dp"
-                    android:minHeight="48dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/edit_text_backgroud"
                     android:ems="10"
                     android:hint="New Email Address"
                     android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -107,42 +119,89 @@
 
                 <EditText
                     android:id="@+id/etUOldPassword"
-                    android:layout_marginTop="20dp"
-                    android:minHeight="48dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/edit_text_backgroud"
                     android:ems="10"
                     android:hint="Old Password"
                     android:inputType="textPassword"
+                    android:minHeight="48dp"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
                     app:layout_constraintTop_toBottomOf="@+id/etUNewEmailAddress" />
 
+                <TextView
+                    android:id="@+id/etUNewPasswordError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/etUOldPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/etUOldPassword" />
+
                 <EditText
                     android:id="@+id/etUNewPassword"
-                    android:layout_marginTop="20dp"
-                    android:minHeight="48dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/edit_text_backgroud"
                     android:ems="10"
                     android:hint="New Password"
                     android:inputType="textPassword"
+                    android:minHeight="48dp"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
                     app:layout_constraintTop_toBottomOf="@+id/etUOldPassword" />
 
                 <Button
                     android:id="@+id/btnUpdate"
-                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/btn_primary"
                     android:text="Update Profile"
                     android:textColor="@color/colorPrimaryButton"
                     app:layout_constraintTop_toBottomOf="@+id/etUNewPassword"
                     tools:layout_editor_absoluteX="32dp" />
+
+                <TextView
+                    android:id="@+id/etStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/btnUpdate"
+                    app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+
+                <Button
+                    android:textSize="10sp"
+                    android:id="@+id/btnSendVerification"
+                    android:background="@drawable/btn_primary"
+                    android:textColor="@color/colorPrimaryButton"
+                    android:maxHeight="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Send Verification"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/etStatus"
+                    app:layout_constraintTop_toBottomOf="@+id/etStatus" />
+
+                <TextView
+                    android:id="@+id/etTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/btnSendVerification"
+                    app:layout_constraintTop_toBottomOf="@+id/btnSendVerification" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,6 +211,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
         app:headerLayout="@layout/drawer_header"
