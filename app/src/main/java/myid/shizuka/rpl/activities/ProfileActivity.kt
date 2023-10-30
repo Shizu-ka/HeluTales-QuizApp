@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
@@ -74,14 +75,15 @@ class ProfileActivity : AppCompatActivity() {
         btnSendVerification.setOnClickListener{
             sendVerification()
         }
-
+        //new
         btnDeleteAccount.setOnClickListener {
             showPasswordPopup()
         }
 
     }
+    //new
     private fun showPasswordPopup() {
-        val passwordDialog = AlertDialog.Builder(this)
+        val passwordDialog = AlertDialog.Builder(this, R.style.AlertDialogTheme)
         passwordDialog.setTitle("Enter Password")
         val passwordInput = EditText(this)
         passwordDialog.setView(passwordInput)
@@ -95,7 +97,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         passwordDialog.show()
     }
-
+    //new
     private fun verifyPassword(password: String) {
         val credential = EmailAuthProvider.getCredential(currentUser?.email ?: "", password)
         currentUser?.reauthenticate(credential)?.addOnCompleteListener { task ->
@@ -106,7 +108,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
-
+    //new
     private fun showConfirmationPopup() {
         val confirmationDialog = AlertDialog.Builder(this)
         confirmationDialog.setTitle("Are you sure?")
@@ -119,7 +121,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         confirmationDialog.show()
     }
-
+    //new
     private fun deleteAccount() {
         val user = FirebaseAuth.getInstance().currentUser
         user?.delete()?.addOnCompleteListener { task ->
