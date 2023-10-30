@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.QuizAdapter
@@ -93,6 +94,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.rateUs -> {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
                     startActivity(browserIntent)
+                }
+                R.id.logOut -> {
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
             mainDrawer.closeDrawers()
