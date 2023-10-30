@@ -24,7 +24,7 @@
             android:theme="@style/Theme.Rpl">
         </activity>
 
-        <activity android:name=".activities.SignupActivity"
+        <activity android:name=".activities.RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.Rpl">
         </activity>
