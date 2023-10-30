@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
@@ -46,6 +47,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
         val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val btnDeleteAccount = findViewById<TextView>(R.id.btnDeleteAccount)
 
         if (user?.isEmailVerified == true) {
             val etStatus = findViewById<TextView>(R.id.etStatus)
@@ -73,14 +75,65 @@ class ProfileActivity : AppCompatActivity() {
             sendVerification()
         }
 
-//        val btnLogin = findViewById<TextView>(R.id.btnLogin)
-//        btnLogin.setOnClickListener {
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+        btnDeleteAccount.setOnClickListener {
+            showPasswordPopup()
+        }
+
+    }
+    private fun showPasswordPopup() {
+        val passwordDialog = AlertDialog.Builder(this)
+        passwordDialog.setTitle("Enter Password")
+        val passwordInput = EditText(this)
+        passwordDialog.setView(passwordInput)
+        passwordDialog.setPositiveButton("Next") { dialog, _ ->
+            val password = passwordInput.text.toString()
+            verifyPassword(password)
+            dialog.dismiss()
+        }
+        passwordDialog.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        passwordDialog.show()
     }
 
+    private fun verifyPassword(password: String) {
+        val credential = EmailAuthProvider.getCredential(currentUser?.email ?: "", password)
+        currentUser?.reauthenticate(credential)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                showConfirmationPopup()
+            } else {
+                Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun showConfirmationPopup() {
+        val confirmationDialog = AlertDialog.Builder(this)
+        confirmationDialog.setTitle("Are you sure?")
+        confirmationDialog.setPositiveButton("Yes") { dialog, _ ->
+            deleteAccount()
+            dialog.dismiss()
+        }
+        confirmationDialog.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+        confirmationDialog.show()
+    }
+
+    private fun deleteAccount() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.delete()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show()
+                // Navigate to the login activity
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Failed to delete account", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     private fun updateUser() {
         val etUNewEmailAddressError = findViewById<TextView>(R.id.etUNewEmailAddressError)
         val etUNewPasswordError = findViewById<TextView>(R.id.etUNewPasswordError)
@@ -246,6 +299,12 @@ class ProfileActivity : AppCompatActivity() {
                 R.id.rateUs -> {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
                     startActivity(browserIntent)
+                }
+                R.id.logOut -> {
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
             mainDrawer.closeDrawers()
