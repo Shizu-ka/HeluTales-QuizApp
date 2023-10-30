@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
 import myid.shizuka.rpl.R
 
-class SignupActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     lateinit var firebaseAuth: FirebaseAuth
 
