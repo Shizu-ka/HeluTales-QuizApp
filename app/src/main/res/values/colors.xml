@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimaryButtonBg">#5d65b3</color>
+    <color name="optionIsSelected">#A5ABED</color>
     <color name="dialogAlertBg">#BEC2F6</color>
     <color name="colorPrimaryButton">#FFFFFFFF</color>3
     <color name="colorEditTextBgColor">#F2F5FA</color>
