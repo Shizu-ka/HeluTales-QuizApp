@@ -32,7 +32,7 @@ class OptionAdapter(val context: Context, val question: Question) :
             notifyDataSetChanged()
         }
         if(question.userAnswer == options[position]){
-            holder.itemView.setBackgroundResource(R.drawable.option_item_selected_bg)
+            holder.itemView.setBackgroundResource(R.drawable.option_item_selected_bg2)
         }
         else{
             holder.itemView.setBackgroundResource(R.drawable.option_item_bg)
