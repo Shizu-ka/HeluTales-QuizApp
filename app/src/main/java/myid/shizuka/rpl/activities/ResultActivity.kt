@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.models.Quiz
+import android.util.Log
+
 
 
 class ResultActivity : AppCompatActivity() {
@@ -51,13 +53,20 @@ class ResultActivity : AppCompatActivity() {
         for (entry in quiz.questions.entries) {
             jumlah += 10
             val question = entry.value
+            Log.d("Question Debug", "Question: ${question.description}")
+            Log.d("Question Debug", "Correct Answer: ${question.answer}")
+            Log.d("Question Debug", "User's Answer: ${question.userAnswer}")
             if (question.answer == question.userAnswer) {
                 score += 10
             }
         }
-        txtScore.text = "Your Score : $score / $jumlah"
+        // Calculate the percentage score
+        val percentage = (score.toDouble() / jumlah.toDouble()) * 100
+
+        txtScore.text = "Your Score: $score/$jumlah (${percentage.toInt()}%)"
+
     }
-	
+
 	override fun onBackPressed() {
         super.onBackPressed()
         startActivity(

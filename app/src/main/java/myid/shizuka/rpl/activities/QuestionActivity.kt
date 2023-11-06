@@ -15,6 +15,7 @@ import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.OptionAdapter
 import myid.shizuka.rpl.models.Question
 import myid.shizuka.rpl.models.Quiz
+import myid.shizuka.rpl.activities.ResultActivity
 
 class QuestionActivity : AppCompatActivity() {
 
@@ -22,25 +23,51 @@ class QuestionActivity : AppCompatActivity() {
     var questions: MutableMap<String, Question>? = null
     var index = 1
 
+    private var showingQuestion = true
+    private lateinit var description: TextView
+    private lateinit var optionAdapter: OptionAdapter
+
+    private var userAnswers: MutableMap<String, String> = mutableMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         setUpFirestore()
         setUpEventListener()
+        //val btnNext = findViewById<Button>(R.id.btnNext)
+        //btnNext.isEnabled = false
+
+        //val optionList = findViewById<RecyclerView>(R.id.optionList)
+        //optionList.setOnClickListener() {
+        //    btnNext.isEnabled = true
+        //}
+
+        description = findViewById(R.id.description)
+        optionAdapter = OptionAdapter(this, Question())
     }
 
     private fun setUpEventListener() {
         val btnPrevious = findViewById<Button>(R.id.btnPrevious)
         val btnNext = findViewById<Button>(R.id.btnNext)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
+
         btnPrevious.setOnClickListener {
             index--
             bindViews()
         }
 
         btnNext.setOnClickListener {
-            index++
+            if (showingQuestion) {
+                // Question -> Materi
+                showingQuestion = false
+            } else {
+                // Materi -> Question
+                index++
+                if (index > questions?.size ?: 0) {
+                    index = 1 // Loop kembali ke data 1 kalau sudah sampai akhir
+                }
+                showingQuestion = true
+            }
             bindViews()
         }
 
@@ -74,52 +101,46 @@ class QuestionActivity : AppCompatActivity() {
         val btnPrevious = findViewById<Button>(R.id.btnPrevious)
         val btnNext = findViewById<Button>(R.id.btnNext)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
+        val optionList = findViewById<RecyclerView>(R.id.optionList)
+        val materiText = findViewById<TextView>(R.id.materiText)
+
+
         btnPrevious.visibility = View.GONE
         btnSubmit.visibility = View.GONE
-        btnNext.visibility = View.GONE
+        optionList.visibility = View.GONE
+        materiText.visibility = View.GONE
 
         if (index == 1) { //first question
             btnNext.visibility = View.VISIBLE
         } else if (index == questions!!.size) { // last question
-            btnSubmit.visibility = View.VISIBLE
-            btnPrevious.visibility = View.VISIBLE
+            if (showingQuestion){
+                btnPrevious.visibility = View.VISIBLE
+                btnNext.visibility = View.VISIBLE
+            }
+            else{
+                btnSubmit.visibility = View.VISIBLE
+                btnPrevious.visibility = View.VISIBLE
+            }
         } else { // Middle
             btnPrevious.visibility = View.VISIBLE
             btnNext.visibility = View.VISIBLE
         }
+
         val question = questions!!["question$index"]
-        val description = findViewById<TextView>(R.id.description)
-        val optionList = findViewById<RecyclerView>(R.id.optionList)
+
         question?.let {
-            description.text = it.description
-            val optionAdapter = OptionAdapter(this, it)
-            optionList.layoutManager = LinearLayoutManager(this)
-            optionList.adapter = optionAdapter
-            optionList.setHasFixedSize(true)
+            if (showingQuestion) {
+                description.text = it.description
+                val optionAdapter = OptionAdapter(this, it)
+                optionList.layoutManager = LinearLayoutManager(this)
+                optionList.adapter = optionAdapter
+                optionList.setHasFixedSize(true)
+                optionList.visibility = View.VISIBLE
+            } else {
+                description.text = it.materi
+                materiText.visibility = View.VISIBLE
+                btnPrevious.visibility = View.GONE
+            }
         }
     }
 }
-//    private fun bindViews() {
-//        btnPrevious.visibility = View.GONE
-//        btnSubmit.visibility = View.GONE
-//        btnNext.visibility = View.GONE
-//
-//        if (index == 1) { //first question
-//            btnNext.visibility = View.VISIBLE
-//        } else if (index == questions!!.size) { // last question
-//            btnSubmit.visibility = View.VISIBLE
-//            btnPrevious.visibility = View.VISIBLE
-//        } else { // Middle
-//            btnPrevious.visibility = View.VISIBLE
-//            btnNext.visibility = View.VISIBLE
-//        }
-//
-//        val question = questions!!["question$index"]
-//        question?.let {
-//            description.text = it.description
-//            val optionAdapter = OptionAdapter(this, it)
-//            optionList.layoutManager = LinearLayoutManager(this)
-//            optionList.adapter = optionAdapter
-//            optionList.setHasFixedSize(true)
-//        }
-//    }
