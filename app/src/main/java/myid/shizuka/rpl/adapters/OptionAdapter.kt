@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.models.Question
+import android.util.Log
+import android.widget.Button
+import com.google.android.material.appbar.MaterialToolbar
 
 class OptionAdapter(val context: Context, val question: Question) :
     RecyclerView.Adapter<OptionAdapter.OptionViewHolder>() {
@@ -27,17 +30,19 @@ class OptionAdapter(val context: Context, val question: Question) :
     override fun onBindViewHolder(holder: OptionViewHolder, position: Int) {
         holder.optionView.text = options[position]
         holder.itemView.setOnClickListener {
-//            Toast.makeText(context,options[position], Toast.LENGTH_SHORT).show()
-            question.userAnswer = options[position]
+            question.userAnswer = options[position] // Update the userAnswer for the current question
             notifyDataSetChanged()
+            Log.d("QuestionActivity", "Selected Option: ${options[position]}")
         }
-        if(question.userAnswer == options[position]){
+
+        if (question.userAnswer == options[position]) {
+            //Buat selected option background
             holder.itemView.setBackgroundResource(R.drawable.option_item_selected_bg2)
-        }
-        else{
+        } else {
             holder.itemView.setBackgroundResource(R.drawable.option_item_bg)
         }
     }
+
 
     override fun getItemCount(): Int {
         return options.size

@@ -14,13 +14,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.activities.QuestionActivity
-//import myid.shizuka.rpl.activities.QuestionActivity
 import myid.shizuka.rpl.models.Quiz
 import myid.shizuka.rpl.utils.ColorPicker
 import myid.shizuka.rpl.utils.IconPicker
 
-//import myid.shizuka.rpl.utils.ColorPicker
-//import myid.shizuka.rpl.utils.IconPicker
 
 class QuizAdapter(val context: Context, val quizzes: List<Quiz>) :
     RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {

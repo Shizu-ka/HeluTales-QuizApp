@@ -67,6 +67,7 @@
         app:layout_constraintStart_toStartOf="@+id/description"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
+
     <Button
         android:visibility="invisible"
         android:id="@+id/btnSubmit"
@@ -77,5 +78,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/guideline"
         app:layout_constraintRight_toRightOf="parent"  />
+
+    <TextView
+        android:id="@+id/materiText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
