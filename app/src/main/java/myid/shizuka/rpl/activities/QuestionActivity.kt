@@ -60,7 +60,7 @@ class QuestionActivity : AppCompatActivity() {
             if (showingQuestion) {
                 // Question -> Materi
                 showingQuestion = false
-            } else {
+            } else { 
                 // Materi -> Question
                 index++
                 if (index > questions?.size ?: 0) {
