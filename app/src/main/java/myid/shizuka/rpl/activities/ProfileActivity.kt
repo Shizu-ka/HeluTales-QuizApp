@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
+import myid.shizuka.rpl.utils.DrawerUtils
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -309,6 +310,7 @@ class ProfileActivity : AppCompatActivity() {
 
 
     fun setUpDrawerLayout() {
+        val currentPage = "profilePage"
         val appBar = findViewById<MaterialToolbar>(R.id.appBar)
         val mainDrawer = findViewById<DrawerLayout>(R.id.mainDrawer)
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
@@ -323,32 +325,33 @@ class ProfileActivity : AppCompatActivity() {
         val highlightedItem = menu.findItem(R.id.profilePage)
         highlightedItem.isChecked = true
 
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when(menuItem.itemId) {
-                R.id.mainPage -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                R.id.followUs -> {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
-                    startActivity(browserIntent)
-                }
-                R.id.rateUs -> {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
-                    startActivity(browserIntent)
-                }
-                R.id.logOut -> {
-                    FirebaseAuth.getInstance().signOut()
-                    intent = Intent(this, LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
-            }
-            mainDrawer.closeDrawers()
-            true
-        }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        navigationView.setNavigationItemSelectedListener { menuItem ->
+//            when(menuItem.itemId) {
+//                R.id.mainPage -> {
+//                    val intent = Intent(this, MainActivity::class.java)
+//                    startActivity(intent)
+//                }
+//                R.id.followUs -> {
+//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
+//                    startActivity(browserIntent)
+//                }
+//                R.id.rateUs -> {
+//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
+//                    startActivity(browserIntent)
+//                }
+//                R.id.logOut -> {
+//                    FirebaseAuth.getInstance().signOut()
+//                    intent = Intent(this, LoginActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                    startActivity(intent)
+//                    finish()
+//                }
+//            }
+//            mainDrawer.closeDrawers()
+//            true
+//        }
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        DrawerUtils.setupNavigationDrawer(this, appBar, mainDrawer, navigationView,currentPage)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
