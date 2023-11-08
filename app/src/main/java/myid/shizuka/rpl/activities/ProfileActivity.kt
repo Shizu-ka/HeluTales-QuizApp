@@ -2,6 +2,7 @@ package myid.shizuka.rpl.activities
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -86,6 +87,8 @@ class ProfileActivity : AppCompatActivity() {
         val passwordDialog = AlertDialog.Builder(this, R.style.AlertDialogTheme)
         passwordDialog.setTitle("Enter Password")
         val passwordInput = EditText(this)
+        passwordInput.getBackground().setColorFilter(getResources().getColor(R.color.color_primary),
+            PorterDuff.Mode.SRC_ATOP);
         passwordDialog.setView(passwordInput)
         passwordDialog.setPositiveButton("Next") { dialog, _ ->
             val password = passwordInput.text.toString()
