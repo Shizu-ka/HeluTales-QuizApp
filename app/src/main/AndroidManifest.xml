@@ -14,29 +14,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RplNoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".materi"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".materi"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.RplNoActionBar"></activity>
+            android:theme="@style/Theme.RplNoActionBar">
+
+        </activity>
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Rpl"></activity>
+            android:theme="@style/Theme.Rpl">
+
+        </activity>
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="true"
-            android:theme="@style/Theme.Rpl"></activity>
+            android:theme="@style/Theme.Rpl">
+
+        </activity>
         <activity
             android:name=".activities.QuestionActivity"
             android:exported="true"
-            android:theme="@style/Theme.Rpl"></activity>
+            android:theme="@style/Theme.Rpl">
+
+        </activity>
         <activity
             android:name=".activities.ProfileActivity"
             android:exported="true"
-            android:theme="@style/Theme.RplNoActionBar"></activity>
+            android:theme="@style/Theme.RplNoActionBar">
+
+        </activity>
         <activity
             android:name=".activities.LoginIntro"
             android:exported="true"
@@ -50,7 +60,9 @@
         <activity
             android:name=".activities.ResultActivity"
             android:exported="true"
-            android:theme="@style/Theme.Rpl"></activity>
+            android:theme="@style/Theme.Rpl">
+
+        </activity>
     </application>
 
 </manifest>
