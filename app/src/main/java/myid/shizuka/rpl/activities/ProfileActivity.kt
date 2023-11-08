@@ -29,13 +29,44 @@ import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
 
 class ProfileActivity : AppCompatActivity() {
-    lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-    lateinit var firebaseAuth: FirebaseAuth
-    val user = Firebase.auth.currentUser
-    val currentUser = FirebaseAuth.getInstance().currentUser
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var firebaseAuth: FirebaseAuth
+    private val user = Firebase.auth.currentUser
+    private val currentUser = FirebaseAuth.getInstance().currentUser
 
+    override fun onResume() {
+        super.onResume()
+        user?.reload()
+        updateVerificationStatusUI()
+    }
+
+    private fun onVerificationComplete() {
+        updateVerificationStatusUI()
+    }
+
+    private fun updateVerificationStatusUI() {
+        val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
+        val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val etStatus = findViewById<TextView>(R.id.etStatus)
+        if (user?.isEmailVerified == true) {
+            btnSendVerification.alpha = 0.5f
+            btnSendVerification.isEnabled = false
+            btnUpdate.isEnabled = true
+
+            etStatus.setText("Verified")
+            etStatus.setTextColor(Color.GREEN)
+        } else {
+            btnSendVerification.isEnabled = true
+            btnUpdate.isEnabled = false
+            btnUpdate.alpha = 0.5f
+
+            etStatus.setText("Unverified")
+            etStatus.setTextColor(Color.RED)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        user?.reload()
         setContentView(R.layout.activity_update_profile)
         setUpDrawerLayout()
 
@@ -82,7 +113,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
     }
-    //new
+
     private fun showPasswordPopup() {
         val passwordDialog = AlertDialog.Builder(this, R.style.AlertDialogTheme)
         passwordDialog.setTitle("Enter Password")
@@ -100,7 +131,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         passwordDialog.show()
     }
-    //new
+
     private fun verifyPassword(password: String) {
         val credential = EmailAuthProvider.getCredential(currentUser?.email ?: "", password)
         currentUser?.reauthenticate(credential)?.addOnCompleteListener { task ->
@@ -111,7 +142,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
-    //new
+
     private fun showConfirmationPopup() {
         val confirmationDialog = AlertDialog.Builder(this)
         confirmationDialog.setTitle("Are you sure?")
@@ -124,7 +155,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         confirmationDialog.show()
     }
-    //new
+
     private fun deleteAccount() {
         val user = FirebaseAuth.getInstance().currentUser
         user?.delete()?.addOnCompleteListener { task ->
@@ -239,6 +270,7 @@ class ProfileActivity : AppCompatActivity() {
             isVerificationAllowed = false
             user?.sendEmailVerification()?.addOnCompleteListener {
                 Toast.makeText(this, "Verification email has been sent to your email", Toast.LENGTH_SHORT).show()
+                onVerificationComplete()
             }
 
             // Enable verification after 1 minute
@@ -307,7 +339,8 @@ class ProfileActivity : AppCompatActivity() {
                 }
                 R.id.logOut -> {
                     FirebaseAuth.getInstance().signOut()
-                    val intent = Intent(this, LoginActivity::class.java)
+                    intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 }
