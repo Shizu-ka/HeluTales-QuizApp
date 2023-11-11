@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,31 +25,27 @@ class QuestionActivity : AppCompatActivity() {
     var index = 1
 
     private var showingQuestion = true
+    private lateinit var btnNext: Button
     private lateinit var description: TextView
     private lateinit var optionAdapter: OptionAdapter
-
-    private var userAnswers: MutableMap<String, String> = mutableMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         setUpFirestore()
-        setUpEventListener()
-        //val btnNext = findViewById<Button>(R.id.btnNext)
-        //btnNext.isEnabled = false
 
-        //val optionList = findViewById<RecyclerView>(R.id.optionList)
-        //optionList.setOnClickListener() {
-        //    btnNext.isEnabled = true
-        //}
+        // Initialize optionAdapter only once
+        optionAdapter = OptionAdapter(this, Question())
+
+        // Initialize btnNext
+        btnNext = findViewById(R.id.btnNext)
 
         description = findViewById(R.id.description)
-        optionAdapter = OptionAdapter(this, Question())
+        setUpEventListener()
     }
 
     private fun setUpEventListener() {
         val btnPrevious = findViewById<Button>(R.id.btnPrevious)
-        val btnNext = findViewById<Button>(R.id.btnNext)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
 
         btnPrevious.setOnClickListener {
@@ -59,8 +56,15 @@ class QuestionActivity : AppCompatActivity() {
         btnNext.setOnClickListener {
             if (showingQuestion) {
                 // Question -> Materi
+                val selectedOption = optionAdapter.getSelectedOption()
+                if (selectedOption == null) {
+                    Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                // You can do something with the selected option, for example:
+                Log.d("USER_ANSWER", "User selected option: $selectedOption")
                 showingQuestion = false
-            } else { 
+            } else {
                 // Materi -> Question
                 index++
                 if (index > questions?.size ?: 0) {
@@ -113,11 +117,10 @@ class QuestionActivity : AppCompatActivity() {
         if (index == 1) { //first question
             btnNext.visibility = View.VISIBLE
         } else if (index == questions!!.size) { // last question
-            if (showingQuestion){
+            if (showingQuestion) {
                 btnPrevious.visibility = View.VISIBLE
                 btnNext.visibility = View.VISIBLE
-            }
-            else{
+            } else {
                 btnSubmit.visibility = View.VISIBLE
                 btnPrevious.visibility = View.VISIBLE
             }
@@ -131,7 +134,10 @@ class QuestionActivity : AppCompatActivity() {
         question?.let {
             if (showingQuestion) {
                 description.text = it.description
-                val optionAdapter = OptionAdapter(this, it)
+
+                // Use the same instance of optionAdapter
+                optionAdapter.updateQuestion(it)
+
                 optionList.layoutManager = LinearLayoutManager(this)
                 optionList.adapter = optionAdapter
                 optionList.setHasFixedSize(true)

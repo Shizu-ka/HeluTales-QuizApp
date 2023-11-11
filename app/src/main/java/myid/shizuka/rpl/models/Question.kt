@@ -1,6 +1,7 @@
 package myid.shizuka.rpl.models
 
-class Question (
+data class Question(
+    var index: Int = 0,
     var description: String = "",
     var option1: String = "",
     var option2: String = "",
