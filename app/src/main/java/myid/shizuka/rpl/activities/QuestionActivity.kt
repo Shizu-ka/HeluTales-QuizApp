@@ -23,11 +23,14 @@ class QuestionActivity : AppCompatActivity() {
     var quizzes: MutableList<Quiz>? = null
     var questions: MutableMap<String, Question>? = null
     var index = 1
+    var beforeIndex = 1
 
     private var showingQuestion = true
     private lateinit var btnNext: Button
     private lateinit var description: TextView
     private lateinit var optionAdapter: OptionAdapter
+    private var selectedOption: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +48,16 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun setUpEventListener() {
-        val btnPrevious = findViewById<Button>(R.id.btnPrevious)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
-
-        btnPrevious.setOnClickListener {
-            index--
-            bindViews()
-        }
 
         btnNext.setOnClickListener {
             if (showingQuestion) {
                 // Question -> Materi
-                val selectedOption = optionAdapter.getSelectedOption()
+                selectedOption = optionAdapter.getSelectedOption()
+                if (beforeIndex == index) {
+                    selectedOption = null
+                    beforeIndex++
+                }
                 if (selectedOption == null) {
                     Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
@@ -102,14 +103,11 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
-        val btnPrevious = findViewById<Button>(R.id.btnPrevious)
         val btnNext = findViewById<Button>(R.id.btnNext)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
         val optionList = findViewById<RecyclerView>(R.id.optionList)
         val materiText = findViewById<TextView>(R.id.materiText)
 
-
-        btnPrevious.visibility = View.GONE
         btnSubmit.visibility = View.GONE
         optionList.visibility = View.GONE
         materiText.visibility = View.GONE
@@ -118,14 +116,11 @@ class QuestionActivity : AppCompatActivity() {
             btnNext.visibility = View.VISIBLE
         } else if (index == questions!!.size) { // last question
             if (showingQuestion) {
-                btnPrevious.visibility = View.VISIBLE
                 btnNext.visibility = View.VISIBLE
             } else {
                 btnSubmit.visibility = View.VISIBLE
-                btnPrevious.visibility = View.VISIBLE
             }
         } else { // Middle
-            btnPrevious.visibility = View.VISIBLE
             btnNext.visibility = View.VISIBLE
         }
 
@@ -142,10 +137,12 @@ class QuestionActivity : AppCompatActivity() {
                 optionList.adapter = optionAdapter
                 optionList.setHasFixedSize(true)
                 optionList.visibility = View.VISIBLE
+                selectedOption = null
             } else {
                 description.text = it.materi
                 materiText.visibility = View.VISIBLE
-                btnPrevious.visibility = View.GONE
+
+                selectedOption = null
             }
         }
     }
