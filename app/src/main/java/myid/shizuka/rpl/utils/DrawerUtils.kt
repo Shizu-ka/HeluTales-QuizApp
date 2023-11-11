@@ -62,6 +62,8 @@ object DrawerUtils {
                     }
                 }
             }
+            ColorPicker.resetColorIndex()
+            IconPicker.resetIconIndex()
             mainDrawer.closeDrawers()
             true
         }

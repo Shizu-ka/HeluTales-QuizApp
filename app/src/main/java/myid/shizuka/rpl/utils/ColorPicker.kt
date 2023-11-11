@@ -19,7 +19,12 @@ object ColorPicker {
     var currentColorIndex = 0
 
     fun getColor(): String {
+        val color = colors[currentColorIndex]
         currentColorIndex = (currentColorIndex + 1) % colors.size
-        return colors[currentColorIndex]
+        return color
+    }
+
+    fun resetColorIndex() {
+        currentColorIndex = 0
     }
 }

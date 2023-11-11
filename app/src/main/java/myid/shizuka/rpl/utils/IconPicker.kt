@@ -3,6 +3,7 @@ package myid.shizuka.rpl.utils
 import myid.shizuka.rpl.R
 
 object IconPicker {
+
     val icons = arrayOf(
         R.drawable.ic_icon_1,
         R.drawable.ic_icon_2,
@@ -13,10 +14,15 @@ object IconPicker {
         R.drawable.ic_icon_7,
         R.drawable.ic_icon_8
     )
-    var currentIcon = 0
+    private var currentIconIndex = 0
 
     fun getIcon(): Int {
-        currentIcon = (currentIcon + 1) % icons.size
-        return icons[currentIcon]
+        val icon = icons[currentIconIndex]
+        currentIconIndex = (currentIconIndex + 1) % icons.size
+        return icon
+    }
+
+    fun resetIconIndex() {
+        currentIconIndex = 0
     }
 }
