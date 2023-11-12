@@ -14,6 +14,8 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import myid.shizuka.rpl.utils.ColorPicker
+import myid.shizuka.rpl.utils.IconPicker
 
 class ResultActivity : AppCompatActivity() {
 
@@ -23,6 +25,8 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
         setUpViews()
+        ColorPicker.resetColorIndex()
+        IconPicker.resetIconIndex()
     }
 
     private fun setUpViews() {
