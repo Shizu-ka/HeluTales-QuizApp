@@ -30,6 +30,7 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var description: TextView
     private lateinit var optionAdapter: OptionAdapter
     private var selectedOption: String? = null
+    private var selectedOptionBefore: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,9 +55,10 @@ class QuestionActivity : AppCompatActivity() {
             if (showingQuestion) {
                 // Question -> Materi
                 selectedOption = optionAdapter.getSelectedOption()
-                if (beforeIndex == index) {
+                if (selectedOption == selectedOptionBefore) {
                     selectedOption = null
-                    beforeIndex++
+                } else {
+                    selectedOptionBefore = selectedOption
                 }
                 if (selectedOption == null) {
                     Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
