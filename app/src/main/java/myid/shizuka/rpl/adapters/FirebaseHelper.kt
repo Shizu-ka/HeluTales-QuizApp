@@ -2,6 +2,7 @@ package myid.shizuka.rpl.adapters
 
 import android.content.Context
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import myid.shizuka.rpl.models.Quiz
 
@@ -31,26 +32,37 @@ class FirebaseHelper {
         }
         fun fetchAverageScore(context: Context, callback: (Int) -> Unit) {
             val firestore = FirebaseFirestore.getInstance()
-            val collectionReference = firestore.collection("completedQuiz")
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            val userResultRef = userId?.let { firestore.collection("completedQuiz").document(it) }
 
-            collectionReference.get().addOnSuccessListener { querySnapshot ->
+            userResultRef?.get()?.addOnSuccessListener { documentSnapshot ->
                 var totalScore = 0
                 var quizCount = 0
 
-                for (document in querySnapshot) {
-                    val score = document.getDouble("score")
-                    if (score != null) {
-                        totalScore += score.toInt()
-                        quizCount++
+                if (documentSnapshot.exists()) {
+                    val userQuizData = documentSnapshot.data
+
+                    if (userQuizData != null) {
+                        for (quizTitle in userQuizData.keys) {
+                            val quizData = userQuizData[quizTitle] as? Map<*, *>
+                            val score = quizData?.get("score") as? Double
+                            Toast.makeText(context, "There is $score", Toast.LENGTH_SHORT).show()
+
+                            if (score != null) {
+                                totalScore += score.toInt()
+                                quizCount++
+                            }
+                        }
                     }
                 }
 
                 val averageScore = if (quizCount != 0) totalScore / quizCount else 0
                 callback(averageScore)
-            }.addOnFailureListener { exception ->
-                Toast.makeText(context, "There is something wrong, please contact us", Toast.LENGTH_SHORT).show()
+            }?.addOnFailureListener { exception ->
+                Toast.makeText(context, "Error code $exception, please contact us", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 }
 
