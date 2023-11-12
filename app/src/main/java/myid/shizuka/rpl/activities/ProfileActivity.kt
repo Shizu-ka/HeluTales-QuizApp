@@ -1,5 +1,6 @@
 package myid.shizuka.rpl.activities
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -11,6 +12,7 @@ import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -25,8 +27,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
+import myid.shizuka.rpl.adapters.FirebaseHelper
 import myid.shizuka.rpl.utils.DrawerUtils
 
 class ProfileActivity : AppCompatActivity() {
@@ -98,6 +102,34 @@ class ProfileActivity : AppCompatActivity() {
             btnUpdate.alpha = 0.5f
             etStatus.setText("Email Status : Unverified")
             etStatus.setTextColor(Color.parseColor("#FF3131"))
+        }
+        val textView2 = findViewById<TextView>(R.id.textView2)
+        val textView3 = findViewById<TextView>(R.id.textView3)
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val firestore = FirebaseFirestore.getInstance()
+        val userResultRef = userId?.let { firestore.collection("completedQuiz").document(it) }
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
+        FirebaseHelper.fetchQuizCount(this) { totalQuizCount ->
+            userResultRef?.get()?.addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val completedQuizCount = documentSnapshot.data?.size ?: 0
+
+                    val progressPercentage = (completedQuizCount.toFloat() / totalQuizCount) * 100
+                    progressBar.progress = progressPercentage.toInt()
+
+                    val animation = ObjectAnimator.ofInt(progressBar, "progress", 0, progressPercentage.toInt())
+                    animation.duration = 3000 // Set the duration of the animation in milliseconds
+                    FirebaseHelper.fetchAverageScore(this) { averageScore ->
+                        textView3.text = "Average Score: $averageScore"
+                        textView2.text = "Congratulations, you have done $completedQuizCount / $totalQuizCount Quiz!!"
+                    }
+
+                    animation.start()
+                }
+            }?.addOnFailureListener { exception ->
+                Toast.makeText(this, "There is something wrong, please contact us", Toast.LENGTH_SHORT).show()
+            }
         }
 
         firebaseAuth = FirebaseAuth.getInstance()
