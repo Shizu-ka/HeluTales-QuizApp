@@ -46,7 +46,6 @@ class FirebaseHelper {
                         for (quizTitle in userQuizData.keys) {
                             val quizData = userQuizData[quizTitle] as? Map<*, *>
                             val score = quizData?.get("score") as? Double
-                            Toast.makeText(context, "There is $score", Toast.LENGTH_SHORT).show()
 
                             if (score != null) {
                                 totalScore += score.toInt()
