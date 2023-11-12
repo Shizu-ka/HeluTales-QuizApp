@@ -68,32 +68,6 @@ class MainActivity : AppCompatActivity() {
         val menu = navigationView.menu
         val highlightedItem = menu.findItem(R.id.mainPage)
         highlightedItem.isChecked = true
-
-//        navigationView.setNavigationItemSelectedListener { menuItem ->
-//            when(menuItem.itemId) {
-//                R.id.profilePage -> {
-//                    val intent = Intent(this, ProfileActivity::class.java)
-//                    startActivity(intent)
-//                }
-//                R.id.followUs -> {
-//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
-//                    startActivity(browserIntent)
-//                }
-//                R.id.rateUs -> {
-//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
-//                    startActivity(browserIntent)
-//                }
-//                R.id.logOut -> {
-//                    FirebaseAuth.getInstance().signOut()
-//                    intent = Intent(this, LoginActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                    startActivity(intent)
-//                    finish()
-//                }
-//            }
-//            mainDrawer.closeDrawers()
-//            true
-//        }
         DrawerUtils.setupNavigationDrawer(this, appBar, mainDrawer, navigationView,currentPage)
     }
 
