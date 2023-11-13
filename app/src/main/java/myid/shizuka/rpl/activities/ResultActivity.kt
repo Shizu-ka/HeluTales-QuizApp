@@ -16,10 +16,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import myid.shizuka.rpl.utils.ColorPicker
 import myid.shizuka.rpl.utils.IconPicker
+import myid.shizuka.rpl.adapters.QuizAdapter
+import myid.shizuka.rpl.adapters.ResultAdapter
 
 class ResultActivity : AppCompatActivity() {
 
     lateinit var quiz: Quiz
+    lateinit var resultAdapter: ResultAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +35,9 @@ class ResultActivity : AppCompatActivity() {
     private fun setUpViews() {
         val quizData = intent.getStringExtra("QUIZ")
         quiz = Gson().fromJson<Quiz>(quizData, Quiz::class.java)
-        calculateScore()
+        resultAdapter = ResultAdapter(quiz)
         setAnswerView()
+        displayScore()
     }
 
     private fun setAnswerView() {
@@ -51,50 +55,11 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateScore() {
+    private fun displayScore() {
         val txtScore = findViewById<TextView>(R.id.txtScore)
-        var score = 0
-        var jumlah = 0
-        for (entry in quiz.questions.entries) {
-            jumlah += 10
-            val question = entry.value
-            Log.d("Question Debug", "Question: ${question.description}")
-            Log.d("Question Debug", "Correct Answer: ${question.answer}")
-            Log.d("Question Debug", "User's Answer: ${question.userAnswer}")
-            if (question.answer == question.userAnswer) {
-                score += 10
-            }
-        }
-        // Kalkulasi Nilai
-        val percentage = (score.toDouble() / jumlah.toDouble()) * 100
-
-        txtScore.text = "Your Score: $score/$jumlah (${percentage.toInt()}%)"
-        if (percentage > 70) {
-            // Store di firestore
-            val userId = FirebaseAuth.getInstance().currentUser?.uid
-            if (userId != null) {
-                val firestore = FirebaseFirestore.getInstance()
-                val userResultRef = firestore.collection("completedQuiz").document(userId)
-
-                val completedQuiz = mapOf(
-                    quiz.title to mapOf(
-                        "score" to percentage
-                    )
-                )
-
-                // Set dokumen
-                userResultRef.set(completedQuiz, SetOptions.merge())
-                    .addOnSuccessListener {
-                        Log.d("Firestore", "Document added/updated successfully!")
-                    }
-                    .addOnFailureListener { e ->
-                        Log.e("Firestore", "Error adding/updating document", e)
-                    }
-            }
-        }
-
+        txtScore.text = resultAdapter.calculateScore()
+        resultAdapter.displayScore()
     }
-
 
     override fun onBackPressed() {
         super.onBackPressed()

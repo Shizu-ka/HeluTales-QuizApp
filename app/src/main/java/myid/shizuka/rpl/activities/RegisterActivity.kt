@@ -9,18 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
 import myid.shizuka.rpl.R
+import myid.shizuka.rpl.adapters.RegisterAdapter
 
 class RegisterActivity : AppCompatActivity() {
 
-    lateinit var firebaseAuth: FirebaseAuth
-
+    private lateinit var registerAdapter: RegisterAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-        firebaseAuth = FirebaseAuth.getInstance()
+
         val btnSignUp = findViewById<Button>(R.id.btnSignUp)
-        btnSignUp.setOnClickListener{
+        btnSignUp.setOnClickListener {
             signUpUser()
         }
 
@@ -30,7 +30,12 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        registerAdapter = RegisterAdapter(this) {
+            navigateToMainActivity()
+        }
     }
+
 
     private fun signUpUser() {
         val etEmailAddress = findViewById<EditText>(R.id.etEmailAddress)
@@ -40,28 +45,12 @@ class RegisterActivity : AppCompatActivity() {
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
         val confirmPassword: String = etConfirmPassword.text.toString()
 
-        if (email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
-            Toast.makeText(this, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (password != confirmPassword) {
-            Toast.makeText(this, "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
-            .addOnCompleteListener(this) {
-                if(it.isSuccessful) {
-                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-                else {
-                    Toast.makeText(this, "Error Creating User", Toast.LENGTH_SHORT).show()
-                }
-            }
+        registerAdapter.createUserWithEmailAndPassword(email, password, confirmPassword)
     }
-
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }
+
