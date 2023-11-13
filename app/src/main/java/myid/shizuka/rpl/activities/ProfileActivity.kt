@@ -31,13 +31,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.FirebaseHelper
+import myid.shizuka.rpl.adapters.ProfileAdapter
+import myid.shizuka.rpl.adapters.ProfileAdapterCallback
 import myid.shizuka.rpl.utils.DrawerUtils
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var firebaseAuth: FirebaseAuth
     private val user = Firebase.auth.currentUser
     private val currentUser = FirebaseAuth.getInstance().currentUser
+    private lateinit var profileAdapter: ProfileAdapter
 
     override fun onResume() {
         super.onResume()
@@ -74,7 +77,26 @@ class ProfileActivity : AppCompatActivity() {
         user?.reload()
         setContentView(R.layout.activity_update_profile)
         setUpDrawerLayout()
+        profileAdapter = ProfileAdapter(this, this)
+        setUpViews()
+        val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
+        val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val btnDeleteAccount = findViewById<TextView>(R.id.btnDeleteAccount)
 
+        btnDeleteAccount.setOnClickListener {
+            profileAdapter.showPasswordPopup()
+        }
+        firebaseAuth = FirebaseAuth.getInstance()
+        btnUpdate.setOnClickListener {
+            updateUser()
+        }
+
+        btnSendVerification.setOnClickListener{
+            sendVerification()
+        }
+    }
+
+    private fun setUpViews() {
         if (currentUser != null) {
             val etUEmailAddress = findViewById<EditText>(R.id.etUEmailAddress)
             etUEmailAddress.setText(currentUser.email)
@@ -85,7 +107,6 @@ class ProfileActivity : AppCompatActivity() {
 
         val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
         val btnUpdate = findViewById<Button>(R.id.btnUpdate)
-        val btnDeleteAccount = findViewById<TextView>(R.id.btnDeleteAccount)
 
         if (user?.isEmailVerified == true) {
             val etStatus = findViewById<TextView>(R.id.etStatus)
@@ -131,82 +152,11 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "There is something wrong, please contact us", Toast.LENGTH_SHORT).show()
             }
         }
-
-        firebaseAuth = FirebaseAuth.getInstance()
-        btnUpdate.setOnClickListener {
-            updateUser()
-        }
-
-        btnSendVerification.setOnClickListener{
-            sendVerification()
-        }
-        //new
-        btnDeleteAccount.setOnClickListener {
-            showPasswordPopup()
-        }
-
     }
 
-    private fun showPasswordPopup() {
-        val passwordDialog = AlertDialog.Builder(this, R.style.AlertDialogTheme)
-        passwordDialog.setTitle("Enter Password")
-        val passwordInput = EditText(this)
-        passwordInput.getBackground().setColorFilter(getResources().getColor(R.color.color_primary),
-            PorterDuff.Mode.SRC_ATOP);
-        passwordDialog.setView(passwordInput)
-        passwordDialog.setPositiveButton("Next") { dialog, _ ->
-            val password = passwordInput.text.toString()
-            verifyPassword(password)
-            dialog.dismiss()
-        }
-        passwordDialog.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.dismiss()
-        }
-        passwordDialog.show()
-    }
-
-    private fun verifyPassword(password: String) {
-        val credential = EmailAuthProvider.getCredential(currentUser?.email ?: "", password)
-        currentUser?.reauthenticate(credential)?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                showConfirmationPopup()
-            } else {
-                Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun showConfirmationPopup() {
-        val confirmationDialog = AlertDialog.Builder(this)
-        confirmationDialog.setTitle("Are you sure?")
-        confirmationDialog.setPositiveButton("Yes") { dialog, _ ->
-            deleteAccount()
-            dialog.dismiss()
-        }
-        confirmationDialog.setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss()
-        }
-        confirmationDialog.show()
-    }
-
-    private fun deleteAccount() {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.delete()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show()
-                // Navigate to the login activity
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Failed to delete account", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
     private fun updateUser() {
         val etUNewEmailAddressError = findViewById<TextView>(R.id.etUNewEmailAddressError)
         val etUNewPasswordError = findViewById<TextView>(R.id.etUNewPasswordError)
-//        val email: String = etUNewEmailAddressError.text.toString()
         val etUNewEmailAddress = findViewById<EditText>(R.id.etUNewEmailAddress)
         val newEmail: String = etUNewEmailAddress.text.toString()
         val etUOldPassword = findViewById<EditText>(R.id.etUOldPassword)
@@ -296,7 +246,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private var isVerificationAllowed = true
     private val verificationHandler = Handler(Looper.getMainLooper())
-    private var remainingTimeInSeconds = 60 // Initial value 60 seconds
+    private var remainingTimeInSeconds = 60
 
     private fun sendVerification() {
         if (isVerificationAllowed) {
@@ -396,6 +346,12 @@ class ProfileActivity : AppCompatActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         actionBarDrawerToggle.syncState()
+    }
+
+    override fun onDeleteAccountConfirmed() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
