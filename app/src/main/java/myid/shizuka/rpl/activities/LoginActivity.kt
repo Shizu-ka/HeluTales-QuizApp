@@ -52,14 +52,14 @@ class LoginActivity : AppCompatActivity() {
     @IgnoreExtraProperties
     data class User(val email: String? = null, val password: String? = null) {
     }
-    fun writeNewUser(email: String, password: String) {
-        val databaseR = Firebase.database.reference
-        val userId = databaseR.child("users").push().key ?: ""
-
-        val user = User(email, password)
-
-        databaseR.child("users").child(userId).setValue(user)
-//        database.child("users").child(email).setValue(user)
-//        database.child("password").child(password).setValue(password)
-    }
+//    fun writeNewUser(email: String, password: String) {
+//        val databaseR = Firebase.database.reference
+//        val userId = databaseR.child("users").push().key ?: ""
+//
+//        val user = User(email, password)
+//
+//        databaseR.child("users").child(userId).setValue(user)
+////        database.child("users").child(email).setValue(user)
+////        database.child("password").child(password).setValue(password)
+//    }
 }
