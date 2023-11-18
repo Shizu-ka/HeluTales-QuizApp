@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_primary"
+    android:background="@color/HeaderColor"
     android:orientation="vertical"
     android:padding="16dp">
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_icon" />
+        android:src="@drawable/helu_smile" />
 
     <TextView
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@android:color/white"
-        android:text="Quiz yourself daily!" />
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="Quiz yourself daily!"
+        android:textColor="@android:color/white" />
 </LinearLayout>

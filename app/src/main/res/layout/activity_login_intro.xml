@@ -10,8 +10,10 @@
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="284dp"
         android:layout_height="42dp"
-        android:text="isnt life collection isnt life collection isnt life collection isnt life collection"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="Unlock Your Learning Path!"
         android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,20 +24,24 @@
         style="@style/TextAppearance.AppCompat.Headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to quiz app"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="HeluTales"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtLoginSubHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_marginBottom="8dp"
         android:id="@+id/imageView"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:src="@drawable/ic_quiz_login_hero_image"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/helu_greet__1"
         app:layout_constraintBottom_toTopOf="@+id/txtLoginHeader"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -45,8 +51,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/btn_primary"
-        android:textColor="@color/colorPrimaryButton"
+        android:fontFamily="@font/baloo_bhai_2"
         android:text="Get Started"
+        android:textColor="@color/colorPrimaryButton"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txtLoginSubHeader"
         app:layout_constraintStart_toStartOf="@+id/txtLoginSubHeader"
         app:layout_constraintTop_toBottomOf="@+id/txtLoginSubHeader" />

@@ -10,11 +10,13 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_marginTop="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryText"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,10 +31,12 @@
     <Button
         android:visibility="invisible"
         android:id="@+id/btnNext"
+        android:background="@drawable/btn_next"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Next"
+        android:textStyle="bold"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/guideline"
@@ -71,8 +75,9 @@
         android:id="@+id/materiText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryText"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/baloo_bhai_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description"
@@ -82,11 +87,13 @@
         android:id="@+id/chosenOptionText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryText"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/baloo_bhai_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description"
         android:visibility="gone" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

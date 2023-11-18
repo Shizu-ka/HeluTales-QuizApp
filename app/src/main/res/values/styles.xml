@@ -3,20 +3,20 @@
 
     <!-- Base application theme. -->
     <style name="Theme.Rpl" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#48B3AC</item>
+        <item name="colorPrimaryDark">@color/HeaderColor</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="Theme.RplNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/HeaderColor</item>
+        <item name="colorPrimaryDark">@color/HeaderColor</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/rounded_corner</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textColor">@color/HeaderColor</item>
         <item name="android:headerDividersEnabled">true</item>
     </style>
 
