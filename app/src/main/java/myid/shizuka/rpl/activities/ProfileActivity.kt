@@ -33,6 +33,7 @@ import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.FirebaseHelper
 import myid.shizuka.rpl.adapters.ProfileAdapter
 import myid.shizuka.rpl.adapters.ProfileAdapterCallback
+import myid.shizuka.rpl.models.User
 import myid.shizuka.rpl.utils.DrawerUtils
 
 class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
@@ -41,6 +42,11 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
     private val user = Firebase.auth.currentUser
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private lateinit var profileAdapter: ProfileAdapter
+
+    var pUser = User().apply {
+        email = currentUser?.email.toString()
+        password = ""
+    }
 
     override fun onResume() {
         super.onResume()
@@ -247,6 +253,7 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
     private var isVerificationAllowed = true
     private val verificationHandler = Handler(Looper.getMainLooper())
     private var remainingTimeInSeconds = 60
+    val tempEmail = pUser.email
 
     private fun sendVerification() {
         if (isVerificationAllowed) {
