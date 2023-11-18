@@ -19,41 +19,47 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:textColor="@color/colorPrimaryText"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login Now" />
+            android:fontFamily="@font/baloo_bhai_2"
+            android:gravity="center"
+            android:text="HeluTales"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <TextView
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/black"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Please login to continue using app" />
+            android:text="Glad To See You! Please login to continue using the app"
+            android:fontFamily="@font/baloo_bhai_2"/>
 
         <EditText
-            android:background="@drawable/edit_text_backgroud"
             android:id="@+id/etEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:layout_marginTop="32dp"
-            android:hint="Email"
-            android:textSize="16sp"
+            android:background="@drawable/edit_text_backgroud"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:fontFamily="@font/baloo_bhai_2"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp" />
 
         <EditText
-            android:background="@drawable/edit_text_backgroud"
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_height="55dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/edit_text_backgroud"
+            android:ems="10"
+            android:fontFamily="@font/baloo_bhai_2"
             android:hint="Password"
-            android:textSize="16sp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="16sp" />
 
         <Button
             android:background="@drawable/btn_primary"
@@ -62,16 +68,18 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryButton"
             android:layout_marginTop="24dp"
-            android:text="Log In" />
+            android:text="Log In"
+            android:fontFamily="@font/baloo_bhai_2"/>
 
         <TextView
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/black"
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textAlignment="center"
-            android:text="Don't have an account? Sign Up" />
+            android:text="Don't have an account? Sign Up"
+            android:fontFamily="@font/baloo_bhai_2"/>
     </LinearLayout>
 
 

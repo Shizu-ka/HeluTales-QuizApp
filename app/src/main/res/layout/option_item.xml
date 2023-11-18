@@ -7,10 +7,11 @@
 
     <TextView
         android:id="@+id/quiz_option"
-        android:textColor="@color/color_primary"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:padding="10dp"
         android:text="A: Odisha"
         android:textSize="14sp" />
 </LinearLayout>
