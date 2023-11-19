@@ -17,33 +17,37 @@ import myid.shizuka.rpl.adapters.OptionAdapter
 import myid.shizuka.rpl.models.Question
 import myid.shizuka.rpl.models.Quiz
 import myid.shizuka.rpl.activities.ResultActivity
+import myid.shizuka.rpl.adapters.QuestionAdapter
 
 class QuestionActivity : AppCompatActivity() {
-
-    var quizzes: MutableList<Quiz>? = null
-    var questions: MutableMap<String, Question>? = null
-    var index = 1
-    var beforeIndex = 1
-
+    private var quizzes: MutableList<Quiz>? = null
+    private var questions: MutableMap<String, Question>? = null
+    private var index = 1
+    private var beforeIndex = 1
     private var showingQuestion = true
     private lateinit var btnNext: Button
     private lateinit var description: TextView
     private lateinit var optionAdapter: OptionAdapter
     private var selectedOption: String? = null
     private var selectedOptionBefore: String? = null
-
+    private lateinit var questionAdapter: QuestionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
-        setUpFirestore()
 
-        // Initialize optionAdapter only once
+        questionAdapter = QuestionAdapter(this)
+        val quizTitle = intent.getStringExtra("Title")
+        if (quizTitle != null) {
+            questionAdapter.setUpFirestore(quizTitle) { quizzes ->
+                this.quizzes = quizzes.toMutableList()
+                this.questions = quizzes[0].questions
+                bindViews()
+            }
+        }
+
         optionAdapter = OptionAdapter(this, Question())
-
-        // Initialize btnNext
         btnNext = findViewById(R.id.btnNext)
-
         description = findViewById(R.id.description)
         setUpEventListener()
     }
@@ -86,22 +90,6 @@ class QuestionActivity : AppCompatActivity() {
             val json = Gson().toJson(quizzes!![0])
             intent.putExtra("QUIZ", json)
             startActivity(intent)
-        }
-    }
-
-    private fun setUpFirestore() {
-        val firestore = FirebaseFirestore.getInstance()
-        val quizTitle = intent.getStringExtra("Title")
-        if (quizTitle != null) {
-            firestore.collection("quizzes").whereEqualTo("title", quizTitle)
-                .get()
-                .addOnSuccessListener {
-                    if (it != null && !it.isEmpty) {
-                        quizzes = it.toObjects(Quiz::class.java)
-                        questions = quizzes!![0].questions
-                        bindViews()
-                    }
-                }
         }
     }
 
