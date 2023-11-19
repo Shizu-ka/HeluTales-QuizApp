@@ -72,7 +72,7 @@ Thanks goes to these wonderful people 👀 :
   <tbody>
     <tr>
       <td align="center"><a href="https://github.com/danisharfh"><img src="https://avatars.githubusercontent.com/u/92115364?v=4?s=100" width="100px;" alt="snowballlll"/><br /><sub><b>snowballlllz</b></sub></a><br /><a href="https://github.com/Shizu-ka/Quiz-App/pull/1" title="Code">💻</a></td>
-      <td align="center"><a href="https://github.com/ghinatrif"><img src="https://avatars.githubusercontent.com/u/92115361?v=4?s=100" width="100px;" alt="ghinatrif"/><br /><sub><b>Ghina Tri Fadilah</b></sub></a><br /><a href="https://github.com/Shizu-ka/Quiz-App/pull/3" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/ghinatrif"><img src="https://avatars.githubusercontent.com/u/92115361?v=4?s=100" width="100px;" alt="ghinatrif"/><br /><sub><b>Ghina Tri Fadilah</b></sub></a><br /><a href="https://github.com/Shizu-ka/Quiz-App/pull/3" title="Design">🎨</a></td>
     </tr>
     <tr>
   </tbody>
