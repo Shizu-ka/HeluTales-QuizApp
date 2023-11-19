@@ -18,6 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="336dp"
+            android:layout_height="85dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/helu_greet__1"
+            app:layout_constraintBottom_toTopOf="@+id/txtLoginHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.441"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
@@ -72,7 +83,7 @@
             android:fontFamily="@font/baloo_bhai_2"/>
 
         <TextView
-            android:textColor="@color/black"
+            android:textColor="@color/HeaderColor"
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
