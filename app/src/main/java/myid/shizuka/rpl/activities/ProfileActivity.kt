@@ -66,11 +66,13 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
             btnSendVerification.alpha = 0.5f
             btnSendVerification.isEnabled = false
             btnUpdate.isEnabled = true
+            btnUpdate.alpha = 1f
 
             etStatus.setText("Verified")
             etStatus.setTextColor(Color.GREEN)
         } else {
             btnSendVerification.isEnabled = true
+            btnSendVerification.alpha = 1f
             btnUpdate.isEnabled = false
             btnUpdate.alpha = 0.5f
 
