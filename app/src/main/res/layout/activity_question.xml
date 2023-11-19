@@ -64,6 +64,7 @@
         android:visibility="invisible"
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
+        android:background="@drawable/btn_submit"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:textAllCaps="false"

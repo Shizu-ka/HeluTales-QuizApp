@@ -55,6 +55,7 @@ class QuestionActivity : AppCompatActivity() {
     private fun setUpEventListener() {
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
 
+
         btnNext.setOnClickListener {
             if (showingQuestion) {
                 // Question -> Materi
