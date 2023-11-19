@@ -109,6 +109,7 @@ class QuestionActivity : AppCompatActivity() {
             if (showingQuestion) {
                 btnNext.visibility = View.VISIBLE
             } else {
+                btnNext.visibility = View.GONE
                 btnSubmit.visibility = View.VISIBLE
             }
         } else { // Middle
