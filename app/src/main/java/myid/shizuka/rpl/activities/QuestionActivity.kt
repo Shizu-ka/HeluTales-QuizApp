@@ -55,6 +55,7 @@ class QuestionActivity : AppCompatActivity() {
     private fun setUpEventListener() {
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
 
+
         btnNext.setOnClickListener {
             if (showingQuestion) {
                 // Question -> Materi
@@ -108,6 +109,7 @@ class QuestionActivity : AppCompatActivity() {
             if (showingQuestion) {
                 btnNext.visibility = View.VISIBLE
             } else {
+                btnNext.visibility = View.GONE
                 btnSubmit.visibility = View.VISIBLE
             }
         } else { // Middle

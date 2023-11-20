@@ -14,7 +14,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="240dp"
-            android:background="@color/colorPrimary"
+            android:background="#48B3AC"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,17 +25,19 @@
                 android:id="@+id/trophy"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:srcCompat="@drawable/ic_icon_trophy"
+                app:srcCompat="@drawable/helu_excited__1"
                 />
 
             <TextView
                 android:id="@+id/txtScore"
+                android:fontFamily="@font/baloo_bhai_2"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Your Score: 20"
                 android:textAlignment="center"
+
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
@@ -47,6 +49,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/baloo_bhai_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />

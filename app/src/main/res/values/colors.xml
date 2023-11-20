@@ -19,4 +19,7 @@
     <color name="colorAccent">#E91E63</color>
     <color name="colorPrimary">#18206F</color>
     <color name="colorPrimaryDark">#11164E</color>
+    <color name="optionColor">#FFA8E6CF</color>
+    <color name="HeaderColor">#48B3AC</color>
+    <color name="btn_submit">#FFA8E6CF</color>
 </resources>
