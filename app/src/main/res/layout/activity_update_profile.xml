@@ -73,7 +73,8 @@
                     android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="32dp"
-                    android:max="100"/>
+                    android:max="100"
+                    android:progressTint="@color/gold_progress"/>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -201,7 +202,8 @@
                     android:layout_marginTop="10dp"
                     android:maxEms="16"
                     android:text="Delete account"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/baloo_bhai_2"
+                    android:textColor="@color/HeaderColor"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/btnUpdate"
                     app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
