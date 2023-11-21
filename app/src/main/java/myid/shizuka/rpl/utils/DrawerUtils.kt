@@ -45,14 +45,14 @@ object DrawerUtils {
                         val intent = Intent(activity, ProfileActivity::class.java)
                         activity.startActivity(intent)
                     }
-                    R.id.followUs -> {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
-                        activity.startActivity(browserIntent)
-                    }
-                    R.id.rateUs -> {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
-                        activity.startActivity(browserIntent)
-                    }
+//                    R.id.followUs -> {
+//                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
+//                        activity.startActivity(browserIntent)
+//                    }
+//                    R.id.rateUs -> {
+//                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.shizuka.my.id"))
+//                        activity.startActivity(browserIntent)
+//                    }
                     R.id.logOut -> {
                         FirebaseAuth.getInstance().signOut()
                         val intent = Intent(activity, LoginActivity::class.java)
