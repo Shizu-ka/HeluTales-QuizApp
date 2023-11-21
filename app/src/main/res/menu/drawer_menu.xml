@@ -7,12 +7,12 @@
     <item
         android:id="@+id/profilePage"
         android:title="Profile" />
-    <item
-        android:id="@+id/followUs"
-        android:title="Follow Us" />
-    <item
-        android:id="@+id/rateUs"
-        android:title="Rate Us" />
+<!--    <item-->
+<!--        android:id="@+id/followUs"-->
+<!--        android:title="Follow Us" />-->
+<!--    <item-->
+<!--        android:id="@+id/rateUs"-->
+<!--        android:title="Rate Us" />-->
     <item
         android:id="@+id/logOut"
         android:title="Log Out" />
