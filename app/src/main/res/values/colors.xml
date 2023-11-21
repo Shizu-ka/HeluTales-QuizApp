@@ -22,4 +22,5 @@
     <color name="optionColor">#FFA8E6CF</color>
     <color name="HeaderColor">#48B3AC</color>
     <color name="btn_submit">#FFA8E6CF</color>
+    <color name="gold_progress">#FFC60A</color>
 </resources>
