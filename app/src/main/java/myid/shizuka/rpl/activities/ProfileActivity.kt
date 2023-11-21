@@ -184,6 +184,10 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
             etUNewPasswordError.setText("Please type your old password if you doesn't want to change it")
             return
         }
+        if (!newEmail.endsWith("@student.ub.ac.id")) {
+            Toast.makeText(this, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         val credential = EmailAuthProvider.getCredential(currentUser?.email!!, oldPassword)
 
