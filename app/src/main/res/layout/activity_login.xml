@@ -92,14 +92,14 @@
             android:fontFamily="@font/baloo_bhai_2"/>
 
         <TextView
-            android:textColor="@color/HeaderColor"
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textAlignment="center"
             android:text="Don't have an account? Sign Up"
-            android:fontFamily="@font/baloo_bhai_2"/>
+            android:fontFamily="@font/baloo_bhai_2"
+            android:textColor="@color/HeaderColor"/>
     </LinearLayout>
 
 

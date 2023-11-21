@@ -163,6 +163,8 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
     }
 
     private fun updateUser() {
+        val etUEmailAddress = findViewById<EditText>(R.id.etUEmailAddress)
+        val oldEmail: String = etUEmailAddress.text.toString()
         val etUNewEmailAddressError = findViewById<TextView>(R.id.etUNewEmailAddressError)
         val etUNewPasswordError = findViewById<TextView>(R.id.etUNewPasswordError)
         val etUNewEmailAddress = findViewById<EditText>(R.id.etUNewEmailAddress)
@@ -177,11 +179,15 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
             return
         }
         if (newEmail.isBlank()) {
-            etUNewEmailAddressError.setText("Please type your old email if you doesn't want to change it")
+            etUNewEmailAddressError.setText("Please type your old email if you dont't want to change it")
             return
         }
         if (newPassword.isBlank()) {
-            etUNewPasswordError.setText("Please type your old password if you doesn't want to change it")
+            etUNewPasswordError.setText("Please type your old password if you don't want to change it")
+            return
+        }
+        if (!newEmail.endsWith("@student.ub.ac.id")) {
+            Toast.makeText(this, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -195,10 +201,20 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
                 if (reauthTask.isSuccessful) {
                     currentUser.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener { updateEmailTask ->
                         if (updateEmailTask.isSuccessful) {
-                            Toast.makeText(this, "Email updated successfully", Toast.LENGTH_SHORT)
-                                .show()
-                            Toast.makeText(this, "You need to verify your new email before you can use it, check your inbox", Toast.LENGTH_SHORT)
-                                .show()
+                            if(oldEmail != newEmail) {
+                                Toast.makeText(
+                                    this,
+                                    "Email updated successfully",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                                Toast.makeText(
+                                    this,
+                                    "You need to verify your new email before you can use it, check your inbox",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                             if (!isMainOpened) {
                                 openMain()
                                 isMainOpened = true

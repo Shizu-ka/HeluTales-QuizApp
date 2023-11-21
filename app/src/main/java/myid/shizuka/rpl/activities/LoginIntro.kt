@@ -14,7 +14,7 @@ class LoginIntro : AppCompatActivity()  {
         setContentView(R.layout.activity_login_intro)
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null ) {
-            Toast.makeText(this, "User is already logged in!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You are already logged in!", Toast.LENGTH_SHORT).show()
             redirect("MAIN")
         }
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)

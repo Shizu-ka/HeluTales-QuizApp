@@ -27,7 +27,7 @@ class ProfileAdapter(private val context: Context, private val callback: Profile
         passwordDialog.setTitle("Enter Password")
         val passwordInput = EditText(context)
         passwordInput.background.setColorFilter(
-            ContextCompat.getColor(context, R.color.color_primary),
+            ContextCompat.getColor(context, R.color.HeaderColor),
             PorterDuff.Mode.SRC_ATOP
         )
         passwordDialog.setView(passwordInput)
