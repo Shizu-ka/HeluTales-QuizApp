@@ -15,7 +15,9 @@ import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.MainAdapter
 import myid.shizuka.rpl.adapters.QuizAdapter
 import myid.shizuka.rpl.models.Quiz
+import myid.shizuka.rpl.utils.ColorPicker
 import myid.shizuka.rpl.utils.DrawerUtils
+import myid.shizuka.rpl.utils.IconPicker
 
 class MainActivity : AppCompatActivity() {
 
@@ -78,5 +80,11 @@ class MainActivity : AppCompatActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         actionBarDrawerToggle.syncState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ColorPicker.resetColorIndex()
+        IconPicker.resetIconIndex()
     }
 }
