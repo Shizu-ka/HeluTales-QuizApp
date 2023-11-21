@@ -44,15 +44,24 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< nice-ui
             android:layout_marginTop="8dp"
             android:text="Glad To See You! Please login to continue using the app"
+=======
+            android:layout_marginTop="35dp"
+            android:text="Welcome Back!\nPlease login to continue using the app"
+>>>>>>> main
             android:fontFamily="@font/baloo_bhai_2"/>
 
         <EditText
             android:id="@+id/etEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+<<<<<<< nice-ui
             android:layout_marginTop="32dp"
+=======
+            android:layout_marginTop="5dp"
+>>>>>>> main
             android:background="@drawable/edit_text_backgroud"
             android:ems="10"
             android:fontFamily="@font/baloo_bhai_2"
