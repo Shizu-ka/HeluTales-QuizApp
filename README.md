@@ -5,7 +5,7 @@
 
 **Quiz App** is a simple ✅ Quiz Android application 📱 using Firbase Firestore Database and Material Design.
 
-***You can Install and test Quiz Zone app from below 👇***
+***You can Install and test Quiz App app from below 👇***
 
 [![Quiz Zone](https://img.shields.io/badge/QuizZone✅-APK-red.svg?style=for-the-badge&logo=android)](url)
 
