@@ -35,6 +35,7 @@
             android:layout_marginTop="8dp"
             android:maxEms="16"
             android:text="Enter your email address and password to get access to your new account"
+            android:fontFamily="@font/baloo_bhai_2"
             android:textColor="@color/black" />
 
         <EditText
@@ -45,6 +46,7 @@
             android:background="@drawable/edit_text_backgroud"
             android:ems="10"
             android:hint="Email"
+            android:fontFamily="@font/baloo_bhai_2"
             android:inputType="textEmailAddress"
             android:textSize="16sp" />
 
@@ -56,6 +58,7 @@
             android:background="@drawable/edit_text_backgroud"
             android:ems="10"
             android:hint="Password"
+            android:fontFamily="@font/baloo_bhai_2"
             android:inputType="textPassword"
             android:textSize="16sp" />
 
@@ -67,17 +70,19 @@
             android:background="@drawable/edit_text_backgroud"
             android:ems="10"
             android:hint="Confirm Password"
+            android:fontFamily="@font/baloo_bhai_2"
             android:inputType="textPassword"
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnSignUp"
-            
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@drawable/btn_primary"
             android:text="Sign Up"
+            android:fontFamily="@font/baloo_bhai_2"
             android:textColor="@color/colorPrimaryButton" />
 
         <TextView
