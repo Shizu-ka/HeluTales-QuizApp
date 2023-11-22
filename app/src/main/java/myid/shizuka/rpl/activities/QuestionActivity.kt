@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -137,5 +138,16 @@ class QuestionActivity : AppCompatActivity() {
                 selectedOption = null
             }
         }
+    }
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setMessage("The progress will be lost if you leave, are you sure?")
+            .setPositiveButton("Yes") { _, _ ->
+                onBackPressedDispatcher.onBackPressed()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }
