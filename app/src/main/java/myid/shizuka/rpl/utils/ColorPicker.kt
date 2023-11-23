@@ -2,10 +2,10 @@ package myid.shizuka.rpl.utils
 
 object ColorPicker {
     val colors = arrayOf(
-        "#3EB9DF",
-        "#3685BC",
+        "#48B3AC",
+        "#97E2C6",
         "#D36280",
-        "#E44F55",
+        "#48B3AC",
         "#FA8056",
         "#818BCA",
         "#7D659F",
