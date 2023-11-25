@@ -9,14 +9,14 @@ import com.google.firebase.auth.FirebaseAuth
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.LoginIntroAdapter
 
-class LoginIntro : BaseActivity() {
+class LoginIntro : AppCompatActivity() {
     private lateinit var adapter: LoginIntroAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_intro)
         adapter = LoginIntroAdapter(this)
         adapter.checkCurrentUser()
+        setContentView(R.layout.activity_login_intro)
 
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
         btnGetStarted.setOnClickListener {
