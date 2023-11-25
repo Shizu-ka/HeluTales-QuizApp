@@ -48,8 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         registerAdapter.createUserWithEmailAndPassword(email, password, confirmPassword)
     }
     private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        registerAdapter.redirect("MAIN")
         finish()
     }
 }

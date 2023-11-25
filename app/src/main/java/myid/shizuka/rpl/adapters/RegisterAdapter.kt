@@ -1,11 +1,15 @@
 package myid.shizuka.rpl.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.activities.Authentication
+import myid.shizuka.rpl.activities.LoginActivity
+import myid.shizuka.rpl.activities.MainActivity
+import myid.shizuka.rpl.activities.RegisterActivity
 import myid.shizuka.rpl.models.User
 
 class RegisterAdapter(private val context: Context, private val onSuccess: () -> Unit): Authentication() {
@@ -54,5 +58,15 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
                     }
                 }
         }
+    }
+
+    override fun redirect(destination: String) {
+        val intent = when (destination) {
+            "MAIN" -> Intent(context, MainActivity::class.java)
+            "LOGIN" -> Intent(context, LoginActivity::class.java)
+            "REGISTER" -> Intent(context, RegisterActivity::class.java)
+            else -> throw IllegalArgumentException("Invalid destination: $destination")
+        }
+        context.startActivity(intent)
     }
 }
