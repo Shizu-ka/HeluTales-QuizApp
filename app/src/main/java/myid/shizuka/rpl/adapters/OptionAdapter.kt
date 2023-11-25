@@ -16,7 +16,7 @@ import com.google.android.material.appbar.MaterialToolbar
 class OptionAdapter(val context: Context, var question: Question) :
     RecyclerView.Adapter<OptionAdapter.OptionViewHolder>() {
 
-    private var options: List<String> = listOf(question.option1, question.option2, question.option3, question.option4)
+    private var options: List<String> = listOf(question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4())
     private var selectedOption: String? = null
 
     fun getSelectedOption(): String? {
@@ -25,7 +25,7 @@ class OptionAdapter(val context: Context, var question: Question) :
 
     fun updateQuestion(newQuestion: Question) {
         question = newQuestion
-        options = listOf(newQuestion.option1, newQuestion.option2, newQuestion.option3, newQuestion.option4)
+        options = listOf(newQuestion.getOption1(), newQuestion.getOption2(), newQuestion.getOption3(), newQuestion.getOption4())
         notifyDataSetChanged()
     }
 
@@ -41,13 +41,13 @@ class OptionAdapter(val context: Context, var question: Question) :
     override fun onBindViewHolder(holder: OptionViewHolder, position: Int) {
         holder.optionView.text = options[position]
         holder.itemView.setOnClickListener {
-            question.userAnswer = options[position] // Update the userAnswer for the current question
+            question.setUserAnswer(options[position]) // Update the userAnswer for the current question
             selectedOption = options[position]
             notifyDataSetChanged()
             Log.d("QuestionActivity", "Selected Option: ${options[position]}")
         }
 
-        if (question.userAnswer == options[position]) {
+        if (question.getUserAnswer() == options[position]) {
             //Buat selected option background
             holder.itemView.setBackgroundResource(R.drawable.option_item_selected_bg2)
         } else {

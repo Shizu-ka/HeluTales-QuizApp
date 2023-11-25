@@ -42,10 +42,10 @@ class ResultActivity : AppCompatActivity() {
 
     private fun setAnswerView() {
         val builder = StringBuilder("")
-        for (entry in quiz.questions.entries) {
+        for (entry in quiz.getQuestions().entries) {
             val question = entry.value
-            builder.append("<font color='#18206F'><b>Question: ${question.description}</b></font><br/><br/>")
-            builder.append("<font color='#009688'>Answer: ${question.answer}</font><br/><br/>")
+            builder.append("<font color='#18206F'><b>Question: ${question.getDescription()}</b></font><br/><br/>")
+            builder.append("<font color='#009688'>Answer: ${question.getAnswer()}</font><br/><br/>")
         }
         val txtAnswer = findViewById<TextView>(R.id.txtAnswer)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

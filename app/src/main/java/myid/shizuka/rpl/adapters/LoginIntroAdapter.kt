@@ -4,17 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import myid.shizuka.rpl.activities.Authentication
 import myid.shizuka.rpl.activities.LoginActivity
 import myid.shizuka.rpl.activities.MainActivity
+import myid.shizuka.rpl.models.User
 
-class LoginIntroAdapter(private val context: Context) {
+class LoginIntroAdapter(private val context: Context): Authentication() {
     private val auth = FirebaseAuth.getInstance()
 
     fun checkCurrentUser() {
-        if (auth.currentUser != null) {
-            Toast.makeText(context, "You are already logged in!", Toast.LENGTH_SHORT).show()
-            redirect("MAIN")
-        }
+        auth()
     }
 
     fun redirectToLogin() {
@@ -30,5 +29,18 @@ class LoginIntroAdapter(private val context: Context) {
             else -> throw IllegalArgumentException("Invalid destination: $destination")
         }
         context.startActivity(intent)
+    }
+
+    override fun auth() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val user = User()
+            user.setEmail(currentUser.email.toString())
+            user.setIsLoggedIn(true)
+            if (user.getEmail().isNotBlank() && user.getIsLoggedIn()) {
+                Toast.makeText(context, "You are already logged in!", Toast.LENGTH_SHORT).show()
+                redirect("MAIN")
+            }
+        }
     }
 }

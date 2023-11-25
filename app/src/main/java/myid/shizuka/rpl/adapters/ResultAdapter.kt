@@ -13,13 +13,13 @@ class ResultAdapter(private val quiz: Quiz) {
     fun calculateScore(): String {
         var score = 0
         var jumlah = 0
-        for (entry in quiz.questions.entries) {
+        for (entry in quiz.getQuestions().entries) {
             jumlah += 10
             val question = entry.value
-            Log.d("Question Debug", "Question: ${question.description}")
-            Log.d("Question Debug", "Correct Answer: ${question.answer}")
-            Log.d("Question Debug", "User's Answer: ${question.userAnswer}")
-            if (question.answer == question.userAnswer) {
+            Log.d("Question Debug", "Question: ${question.getDescription()}")
+            Log.d("Question Debug", "Correct Answer: ${question.getAnswer()}")
+            Log.d("Question Debug", "User's Answer: ${question.getUserAnswer()}")
+            if (question.getAnswer() == question.getUserAnswer()) {
                 score += 10
             }
         }
@@ -37,7 +37,7 @@ class ResultAdapter(private val quiz: Quiz) {
                 val userResultRef = firestore.collection("completedQuiz").document(userId)
 
                 val completedQuiz = mapOf(
-                    quiz.title to mapOf(
+                    quiz.getTitle() to mapOf(
                         "score" to percentage
                     )
                 )

@@ -28,13 +28,13 @@ class QuizAdapter(val context: Context, val quizzes: List<Quiz>) :
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
-        holder.textViewTitle.text = quizzes[position].title
+        holder.textViewTitle.text = quizzes[position].getTitle()
         holder.cardContainer.setCardBackgroundColor(Color.parseColor(ColorPicker.getColor()))
         holder.iconView.setImageResource(IconPicker.getIcon())
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, quizzes[position].title, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, quizzes[position].getTitle(), Toast.LENGTH_SHORT).show()
             val intent = Intent(context, QuestionActivity::class.java)
-            intent.putExtra("Title", quizzes[position].title)
+            intent.putExtra("Title", quizzes[position].getTitle())
             context.startActivity(intent)
         }
     }

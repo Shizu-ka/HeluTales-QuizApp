@@ -42,7 +42,7 @@ class QuestionActivity : AppCompatActivity() {
         if (quizTitle != null) {
             questionAdapter.setUpFirestore(quizTitle) { quizzes ->
                 this.quizzes = quizzes.toMutableList()
-                this.questions = quizzes[0].questions
+                this.questions = quizzes[0].getQuestions()
                 bindViews()
             }
         }
@@ -121,7 +121,7 @@ class QuestionActivity : AppCompatActivity() {
 
         question?.let {
             if (showingQuestion) {
-                description.text = it.description
+                description.text = it.getDescription()
 
                 // Use the same instance of optionAdapter
                 optionAdapter.updateQuestion(it)
@@ -132,7 +132,7 @@ class QuestionActivity : AppCompatActivity() {
                 optionList.visibility = View.VISIBLE
                 selectedOption = null
             } else {
-                description.text = it.materi
+                description.text = it.getMateri()
                 materiText.visibility = View.VISIBLE
 
                 selectedOption = null
