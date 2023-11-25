@@ -13,7 +13,7 @@ class LoginIntroAdapter(private val context: Context): Authentication() {
     private val auth = FirebaseAuth.getInstance()
 
     fun checkCurrentUser() {
-        auth()
+        authUser()
     }
 
     fun redirectToLogin() {
@@ -31,7 +31,7 @@ class LoginIntroAdapter(private val context: Context): Authentication() {
         context.startActivity(intent)
     }
 
-    override fun auth() {
+    override fun authUser() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val user = User()

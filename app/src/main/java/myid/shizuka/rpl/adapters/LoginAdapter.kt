@@ -23,17 +23,19 @@ class LoginAdapter(private val context: Context, private val onSuccess: () -> Un
             Toast.makeText(context, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
             return
         }
-        auth()
+        authUser()
     }
 
-    override fun auth() {
+    override fun authUser() {
         user?.let {
             firebaseAuth.signInWithEmailAndPassword(it.getEmail(), user!!.getPassword())
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
+                        user!!.setIsLoggedIn(true)
                         Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                         onSuccess.invoke() // Invoke the success callback
                     } else {
+                        user!!.setIsLoggedIn(false)
                         Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show()
                     }
                 }

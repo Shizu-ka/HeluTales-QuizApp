@@ -1,7 +1,6 @@
 package myid.shizuka.rpl.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
@@ -34,10 +33,10 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
             setPassword(password)
         }
 
-        auth()
+        authUser()
     }
 
-    override fun auth() {
+    override fun authUser() {
         user?.let{
             firebaseAuth.createUserWithEmailAndPassword(it.getEmail(), user!!.getPassword())
                 .addOnCompleteListener { task ->
