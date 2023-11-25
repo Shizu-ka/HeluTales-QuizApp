@@ -11,13 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.OptionAdapter
 import myid.shizuka.rpl.models.Question
 import myid.shizuka.rpl.models.Quiz
-import myid.shizuka.rpl.activities.ResultActivity
 import myid.shizuka.rpl.adapters.QuestionAdapter
 
 class QuestionActivity : AppCompatActivity() {
@@ -40,10 +38,10 @@ class QuestionActivity : AppCompatActivity() {
         questionAdapter = QuestionAdapter(this)
         val quizTitle = intent.getStringExtra("Title")
         if (quizTitle != null) {
-            questionAdapter.setUpFirestore(quizTitle) { quizzes ->
+            questionAdapter.fetchQuestions(quizTitle) { quizzes ->
                 this.quizzes = quizzes.toMutableList()
                 this.questions = quizzes[0].getQuestions()
-                bindViews()
+                showQuestions()
             }
         }
 
@@ -81,7 +79,7 @@ class QuestionActivity : AppCompatActivity() {
                 }
                 showingQuestion = true
             }
-            bindViews()
+            showQuestions()
         }
 
         btnSubmit.setOnClickListener {
@@ -94,7 +92,7 @@ class QuestionActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindViews() {
+    private fun showQuestions() { //tadinya bindViews()
         val btnNext = findViewById<Button>(R.id.btnNext)
         val btnSubmit = findViewById<Button>(R.id.btnSubmit)
         val optionList = findViewById<RecyclerView>(R.id.optionList)

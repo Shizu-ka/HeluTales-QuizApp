@@ -36,11 +36,15 @@ class LoginAdapter(private val context: Context, private val onSuccess: () -> Un
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         user!!.setIsLoggedIn(true)
-                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                        onSuccess.invoke() // Invoke the success callback
+                        if (user!!.getIsLoggedIn()) {
+                            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                            onSuccess.invoke() // Invoke the success callback
+                        }
                     } else {
                         user!!.setIsLoggedIn(false)
-                        Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show()
+                        if (!user!!.getIsLoggedIn()) {
+                            Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
         }

@@ -4,6 +4,7 @@ package myid.shizuka.rpl.models
         private var email: String = ""
         private var password: String = ""
         private var isLoggedIn: Boolean = false
+        private var isSuccessful: Boolean = false
 
         fun getEmail(): String {
             return email
@@ -27,5 +28,13 @@ package myid.shizuka.rpl.models
 
         fun setIsLoggedIn(isLoggedIn: Boolean) {
             this.isLoggedIn = isLoggedIn
+        }
+
+        fun getIsSuccessful(): Boolean {
+            return isLoggedIn
+        }
+
+        fun setIsSuccessful(isSuccessful: Boolean) {
+            this.isSuccessful = isSuccessful
         }
     }

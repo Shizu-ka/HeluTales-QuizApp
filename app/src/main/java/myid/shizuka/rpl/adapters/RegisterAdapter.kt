@@ -17,7 +17,7 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var user: User? = null
 
-    fun createUserWithEmailAndPassword(email: String, password: String, confirmPassword: String) {
+    fun createUser(email: String, password: String, confirmPassword: String) {
         if (email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
             Toast.makeText(context, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
             return
@@ -36,7 +36,6 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
             setEmail(email)
             setPassword(password)
         }
-
         authUser()
     }
 
@@ -45,16 +44,19 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
             firebaseAuth.createUserWithEmailAndPassword(it.getEmail(), user!!.getPassword())
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-
-
                         val databaseR = Firebase.database.reference
                         val userId = databaseR.child("users").push().key ?: ""
                         databaseR.child("users").child(userId).setValue(user)
-
-                        Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
-                        onSuccess.invoke() // Invoke the success callback
+                        user!!.setIsSuccessful(true)
+                        if (user!!.getIsSuccessful()) {
+                            Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
+                            onSuccess.invoke() // Invoke the success callback
+                        }
                     } else {
-                        Toast.makeText(context, "Error Creating User", Toast.LENGTH_SHORT).show()
+                        user!!.setIsSuccessful(false)
+                        if (!user!!.getIsSuccessful()) {
+                            Toast.makeText(context, "Error Creating User", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
         }

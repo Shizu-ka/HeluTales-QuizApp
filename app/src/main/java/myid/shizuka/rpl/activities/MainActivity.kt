@@ -1,7 +1,5 @@
 package myid.shizuka.rpl.activities
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,7 +14,7 @@ import myid.shizuka.rpl.adapters.MainAdapter
 import myid.shizuka.rpl.adapters.QuizAdapter
 import myid.shizuka.rpl.models.Quiz
 import myid.shizuka.rpl.utils.ColorPicker
-import myid.shizuka.rpl.utils.DrawerUtils
+import myid.shizuka.rpl.utils.Drawer
 import myid.shizuka.rpl.utils.IconPicker
 
 class MainActivity : AppCompatActivity() {
@@ -67,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         val menu = navigationView.menu
         val highlightedItem = menu.findItem(R.id.mainPage)
         highlightedItem.isChecked = true
-        DrawerUtils.setupNavigationDrawer(this, appBar, mainDrawer, navigationView, currentPage)
+        Drawer.setupNavigationDrawer(this, appBar, mainDrawer, navigationView, currentPage)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -6,8 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.RegisterAdapter
 
@@ -31,9 +29,11 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        registerAdapter = RegisterAdapter(this) {
-            navigateToMainActivity()
-        }
+        registerAdapter.redirect("MAIN")
+        finish()
+//        registerAdapter = RegisterAdapter(this) {
+//            navigateToMainActivity()
+//        }
     }
 
 
@@ -45,11 +45,11 @@ class RegisterActivity : AppCompatActivity() {
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
         val confirmPassword: String = etConfirmPassword.text.toString()
 
-        registerAdapter.createUserWithEmailAndPassword(email, password, confirmPassword)
+        registerAdapter.createUser(email, password, confirmPassword)
     }
-    private fun navigateToMainActivity() {
-        registerAdapter.redirect("MAIN")
-        finish()
-    }
+//    private fun navigateToMainActivity() {
+//        registerAdapter.redirect("MAIN")
+//        finish()
+//    }
 }
 

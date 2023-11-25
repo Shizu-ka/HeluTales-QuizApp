@@ -1,8 +1,6 @@
 package myid.shizuka.rpl.utils
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,7 +12,7 @@ import myid.shizuka.rpl.activities.LoginActivity
 import myid.shizuka.rpl.activities.MainActivity
 import myid.shizuka.rpl.activities.ProfileActivity
 
-object DrawerUtils {
+object Drawer {
     fun setupNavigationDrawer(activity: AppCompatActivity, appBar: MaterialToolbar, mainDrawer: DrawerLayout, navigationView: NavigationView, currentPage: String) {
         activity.setSupportActionBar(appBar)
 
@@ -31,6 +29,8 @@ object DrawerUtils {
             if (menuItem.itemId == R.id.profilePage && currentPage == "profilePage") {
                 val highlightedItem = menu.findItem(R.id.profilePage)
                 highlightedItem.isChecked = true
+                val logOutOption = menu.findItem(R.id.logOut)
+                logOutOption.isVisible = false
             } else if(menuItem.itemId == R.id.mainPage && currentPage == "mainPage") {
                 val highlightedItem = menu.findItem(R.id.mainPage)
                 highlightedItem.isChecked = true

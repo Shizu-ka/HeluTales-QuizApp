@@ -27,7 +27,6 @@ class LoginIntroAdapter(private val context: Context): Authentication() {
         val intent = when (destination) {
             "MAIN" -> Intent(context, MainActivity::class.java)
             "LOGIN" -> Intent(context, LoginActivity::class.java)
-            "REGISTER" -> Intent(context, RegisterActivity::class.java)
             else -> throw IllegalArgumentException("Invalid destination: $destination")
         }
         context.startActivity(intent)

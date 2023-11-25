@@ -5,7 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import myid.shizuka.rpl.models.Quiz
 
 class QuestionAdapter(private val context: Context) {
-    fun setUpFirestore(quizTitle: String, callback: (List<Quiz>) -> Unit) {
+    fun fetchQuestions(quizTitle: String, callback: (List<Quiz>) -> Unit) {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("quizzes").whereEqualTo("title", quizTitle)
             .get()

@@ -3,12 +3,9 @@ package myid.shizuka.rpl.activities
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
@@ -18,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
@@ -34,7 +30,7 @@ import myid.shizuka.rpl.adapters.FirebaseHelper
 import myid.shizuka.rpl.adapters.ProfileAdapter
 import myid.shizuka.rpl.adapters.ProfileAdapterCallback
 import myid.shizuka.rpl.models.User
-import myid.shizuka.rpl.utils.DrawerUtils
+import myid.shizuka.rpl.utils.Drawer
 
 class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -358,7 +354,7 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
 //            true
 //        }
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        DrawerUtils.setupNavigationDrawer(this, appBar, mainDrawer, navigationView,currentPage)
+        Drawer.setupNavigationDrawer(this, appBar, mainDrawer, navigationView,currentPage)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
