@@ -1,4 +1,4 @@
-package myid.shizuka.rpl.activities
+package myid.shizuka.rpl.adapters
 
 abstract class Authentication {
     abstract fun authUser()

@@ -2,7 +2,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import myid.shizuka.rpl.activities.Authentication
+import myid.shizuka.rpl.adapters.Authentication
 import myid.shizuka.rpl.activities.LoginActivity
 import myid.shizuka.rpl.activities.MainActivity
 import myid.shizuka.rpl.activities.RegisterActivity
