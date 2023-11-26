@@ -71,12 +71,12 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:background="@drawable/btn_primary"
-            android:text="Sign Up"
+            android:text="Register"
             android:textColor="@color/colorPrimaryButton" />
 
         <TextView
