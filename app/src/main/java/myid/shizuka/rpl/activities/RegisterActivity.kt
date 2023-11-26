@@ -15,7 +15,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(R.layout.activity_register)
 
         val btnSignUp = findViewById<Button>(R.id.btnSignUp)
         btnSignUp.setOnClickListener {
@@ -29,11 +29,11 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        registerAdapter.redirect("MAIN")
-        finish()
-//        registerAdapter = RegisterAdapter(this) {
-//            navigateToMainActivity()
-//        }
+//        registerAdapter.redirect("MAIN")
+//        finish()
+        registerAdapter = RegisterAdapter(this) {
+            navigateToMainActivity()
+        }
     }
 
 
@@ -47,9 +47,9 @@ class RegisterActivity : AppCompatActivity() {
 
         registerAdapter.createUser(email, password, confirmPassword)
     }
-//    private fun navigateToMainActivity() {
-//        registerAdapter.redirect("MAIN")
-//        finish()
-//    }
+    private fun navigateToMainActivity() {
+        registerAdapter.redirect("MAIN")
+        finish()
+    }
 }
 
