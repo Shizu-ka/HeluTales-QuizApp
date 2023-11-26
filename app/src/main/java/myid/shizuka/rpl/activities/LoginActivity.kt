@@ -1,15 +1,11 @@
 package myid.shizuka.rpl.activities
 
 import LoginAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.IgnoreExtraProperties
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
 
 class LoginActivity : AppCompatActivity() {
@@ -27,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
             performLogin()
         }
 
-        val btnSignUp = findViewById<TextView>(R.id.btnSignUp)
+        val btnSignUp = findViewById<TextView>(R.id.btnRegister)
         btnSignUp.setOnClickListener {
             loginAdapter.redirectToRegister()
             finish()
