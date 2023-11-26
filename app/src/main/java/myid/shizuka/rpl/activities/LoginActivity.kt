@@ -12,6 +12,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
 
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginAdapter: LoginAdapter
