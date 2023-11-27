@@ -122,118 +122,51 @@
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/etUNewEmailAddress"
                     app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
                     app:layout_constraintTop_toBottomOf="@+id/etUEmailAddress" />
-
-                <EditText
-                    android:id="@+id/etUNewEmailAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/edit_text_backgroud"
-                    android:ems="10"
-                    android:hint="New Email Address"
-                    android:fontFamily="@font/baloo_bhai_2"
-                    android:inputType="textEmailAddress"
-                    android:minHeight="48dp"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etUEmailAddress" />
-
-                <EditText
-                    android:id="@+id/etUOldPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/edit_text_backgroud"
-                    android:ems="10"
-                    android:hint="Old Password"
-                    android:fontFamily="@font/baloo_bhai_2"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
-                    app:layout_constraintTop_toBottomOf="@+id/etUNewEmailAddress" />
-
-                <TextView
-                    android:id="@+id/etUNewPasswordError"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/etUOldPassword"
-                    app:layout_constraintTop_toBottomOf="@+id/etUOldPassword" />
-
-                <EditText
-                    android:id="@+id/etUNewPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/edit_text_backgroud"
-                    android:ems="10"
-                    android:hint="New Password"
-                    android:fontFamily="@font/baloo_bhai_2"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
-                    app:layout_constraintTop_toBottomOf="@+id/etUOldPassword" />
 
                 <Button
-                    android:id="@+id/btnUpdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/btn_primary"
-                    android:text="Update Profile"
-                    android:fontFamily="@font/baloo_bhai_2"
-                    android:textColor="@color/colorPrimaryButton"
-                    app:layout_constraintTop_toBottomOf="@+id/etUNewPassword"
-                    tools:layout_editor_absoluteX="32dp" />
-
-                <TextView
                     android:id="@+id/btnDeleteAccount"
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:maxEms="16"
-                    android:text="Delete account"
+                    android:background="@drawable/btn_primary"
                     android:fontFamily="@font/baloo_bhai_2"
-                    android:textColor="@color/HeaderColor"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/btnUpdate"
-                    app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+                    android:maxHeight="30dp"
+                    android:text="Delete account"
+                    android:textColor="@color/colorPrimaryButton"
+                    android:textSize="10sp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/etUEmailAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/etUEmailAddress" />
 
                 <TextView
                     android:id="@+id/etStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/btnUpdate"
-                    app:layout_constraintTop_toBottomOf="@+id/btnUpdate" />
+                    app:layout_constraintStart_toStartOf="@+id/btnDeleteAccount"
+                    app:layout_constraintTop_toBottomOf="@+id/btnDeleteAccount" />
+/>
 
                 <Button
-                    android:textSize="10sp"
                     android:id="@+id/btnSendVerification"
-                    android:background="@drawable/btn_primary"
-                    android:textColor="@color/colorPrimaryButton"
-                    android:maxHeight="30dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Send Verification"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btn_primary"
                     android:fontFamily="@font/baloo_bhai_2"
-                    android:paddingRight="15dp"
+                    android:maxHeight="30dp"
                     android:paddingLeft="15dp"
-                    app:layout_constraintStart_toStartOf="@+id/etStatus"
-                    app:layout_constraintTop_toBottomOf="@+id/etStatus" />
+                    android:paddingRight="15dp"
+                    android:text="Send Verification"
+                    android:textColor="@color/colorPrimaryButton"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/btnDeleteAccount"
+                    app:layout_constraintTop_toBottomOf="@+id/btnDeleteAccount" />
 
                 <TextView
                     android:id="@+id/etTimer"
@@ -245,7 +178,6 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/btnSendVerification"
                     app:layout_constraintTop_toBottomOf="@+id/btnSendVerification" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
