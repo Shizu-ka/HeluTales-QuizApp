@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.activities.LoginActivity
@@ -17,6 +18,10 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
     private var user: User? = null
 
     fun createUser(email: String, password: String, confirmPassword: String) {
+        user = User().apply {
+            setEmail(email)
+            setPassword(password)
+        }
         if (email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
             Toast.makeText(context, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
             return
@@ -30,10 +35,6 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
         if (!email.endsWith("@student.ub.ac.id")) {
             Toast.makeText(context, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
             return
-        }
-        user = User().apply {
-            setEmail(email)
-            setPassword(password)
         }
         authUser()
     }
@@ -50,6 +51,7 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
                         if (user!!.getIsSuccessful()) {
                             Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
                             onSuccess.invoke() // Invoke the success callback
+
                         }
                     } else {
                         user!!.setIsSuccessful(false)
