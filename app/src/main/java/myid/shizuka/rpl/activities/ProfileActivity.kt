@@ -56,21 +56,21 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
 
     private fun updateVerificationStatusUI() {
         val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
-        val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val btnDeleteAccount = findViewById<Button>(R.id.btnDeleteAccount)
         val etStatus = findViewById<TextView>(R.id.etStatus)
         if (user?.isEmailVerified == true) {
             btnSendVerification.alpha = 0.5f
             btnSendVerification.isEnabled = false
-            btnUpdate.isEnabled = true
-            btnUpdate.alpha = 1f
+            btnDeleteAccount.isEnabled = true
+            btnDeleteAccount.alpha = 1f
 
             etStatus.setText("Verified")
             etStatus.setTextColor(Color.GREEN)
         } else {
             btnSendVerification.isEnabled = true
             btnSendVerification.alpha = 1f
-            btnUpdate.isEnabled = false
-            btnUpdate.alpha = 0.5f
+            btnDeleteAccount.isEnabled = false
+            btnDeleteAccount.alpha = 0.5f
 
             etStatus.setText("Unverified")
             etStatus.setTextColor(Color.RED)
@@ -84,16 +84,12 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
         profileAdapter = ProfileAdapter(this, this)
         setUpViews()
         val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
-        val btnUpdate = findViewById<Button>(R.id.btnUpdate)
         val btnDeleteAccount = findViewById<TextView>(R.id.btnDeleteAccount)
 
         btnDeleteAccount.setOnClickListener {
             profileAdapter.showPasswordPopup()
         }
         firebaseAuth = FirebaseAuth.getInstance()
-        btnUpdate.setOnClickListener {
-            updateUser()
-        }
 
         btnSendVerification.setOnClickListener{
             sendVerification()
@@ -110,21 +106,21 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
         }
 
         val btnSendVerification = findViewById<Button>(R.id.btnSendVerification)
-        val btnUpdate = findViewById<Button>(R.id.btnUpdate)
+        val btnDeleteAccount = findViewById<Button>(R.id.btnDeleteAccount)
 
         if (user?.isEmailVerified == true) {
             val etStatus = findViewById<TextView>(R.id.etStatus)
             btnSendVerification.alpha = 0.5f
             btnSendVerification.isEnabled = false
-            btnUpdate.isEnabled = true
+            btnDeleteAccount.isEnabled = true
 
             etStatus.setText("Email Status : Verified")
             etStatus.setTextColor(Color.parseColor("#51FF0D"))
         } else {
             val etStatus = findViewById<TextView>(R.id.etStatus)
             btnSendVerification.isEnabled = true
-            btnUpdate.isEnabled = false
-            btnUpdate.alpha = 0.5f
+            btnDeleteAccount.isEnabled = false
+            btnDeleteAccount.alpha = 0.5f
             etStatus.setText("Email Status : Unverified")
             etStatus.setTextColor(Color.parseColor("#FF3131"))
         }
@@ -154,112 +150,6 @@ class ProfileActivity : AppCompatActivity(), ProfileAdapterCallback {
                 }
             }?.addOnFailureListener { exception ->
                 Toast.makeText(this, "There is something wrong, please contact us", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun updateUser() {
-        val etUEmailAddress = findViewById<EditText>(R.id.etUEmailAddress)
-        val oldEmail: String = etUEmailAddress.text.toString()
-        val etUNewEmailAddressError = findViewById<TextView>(R.id.etUNewEmailAddressError)
-        val etUNewPasswordError = findViewById<TextView>(R.id.etUNewPasswordError)
-        val etUNewEmailAddress = findViewById<EditText>(R.id.etUNewEmailAddress)
-        val newEmail: String = etUNewEmailAddress.text.toString()
-        val etUOldPassword = findViewById<EditText>(R.id.etUOldPassword)
-        val oldPassword: String = etUOldPassword.text.toString()
-        val etUNewPassword = findViewById<EditText>(R.id.etUNewPassword)
-        val newPassword: String = etUNewPassword.text.toString()
-
-        if (oldPassword.isBlank()) {
-            Toast.makeText(this, "Email or Password can't be blank", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (newEmail.isBlank()) {
-            etUNewEmailAddressError.setText("Please type your old email if you dont't want to change it")
-            return
-        }
-        if (newPassword.isBlank()) {
-            etUNewPasswordError.setText("Please type your old password if you don't want to change it")
-            return
-        }
-        if (!newEmail.endsWith("@student.ub.ac.id")) {
-            Toast.makeText(this, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val credential = EmailAuthProvider.getCredential(currentUser?.email!!, oldPassword)
-
-        // Reauthenticate the user with the old password
-        var isMainOpened = false
-        currentUser.reauthenticate(credential).addOnCompleteListener { reauthTask ->
-            if (user?.isEmailVerified == true) {
-                // Update the email
-                if (reauthTask.isSuccessful) {
-                    currentUser.verifyBeforeUpdateEmail(newEmail).addOnCompleteListener { updateEmailTask ->
-                        if (updateEmailTask.isSuccessful) {
-                            if(oldEmail != newEmail) {
-                                Toast.makeText(
-                                    this,
-                                    "Email updated successfully",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                                Toast.makeText(
-                                    this,
-                                    "You need to verify your new email before you can use it, check your inbox",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                            }
-                            if (!isMainOpened) {
-                                openMain()
-                                isMainOpened = true
-                            }
-                        } else {
-                            val emailErrorMessage =
-                                updateEmailTask.exception?.message ?: "Failed to update email"
-                            Toast.makeText(this, emailErrorMessage, Toast.LENGTH_SHORT).show()
-                        }
-                    }.addOnFailureListener { exception ->
-                        // Email update failed
-                        val errorMessage = when (exception) {
-                            is FirebaseAuthInvalidCredentialsException -> "Invalid email format"
-                            is FirebaseAuthUserCollisionException -> "An account with this email already exists"
-                            else -> "Failed to update email: ${exception.message}"
-                        }
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                // Old password is correct, now update the password
-                currentUser.updatePassword(newPassword)
-                    .addOnCompleteListener { updatePasswordTask ->
-                        if (updatePasswordTask.isSuccessful) {
-                            if(newPassword != oldPassword) {
-                                Toast.makeText(
-                                    this,
-                                    "Password updated successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            if (!isMainOpened) {
-                                openMain()
-                                isMainOpened = true
-                            }
-                        } else {
-                            val passwordErrorMessage =
-                                updatePasswordTask.exception?.message ?: "Failed to update password"
-                            Toast.makeText(this, passwordErrorMessage, Toast.LENGTH_SHORT).show()
-                        }
-                    }.addOnFailureListener { exception ->
-                        // Password update failed
-                        val errorMessage = when (exception) {
-                            // Handle specific password validation errors if needed
-                            is FirebaseAuthWeakPasswordException -> "Password should be at least 6 characters long"
-                            else -> "Failed to update password: ${exception.message}"
-                        }
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                    }
             }
         }
     }
