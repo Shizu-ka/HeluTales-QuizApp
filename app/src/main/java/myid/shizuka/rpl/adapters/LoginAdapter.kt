@@ -19,10 +19,6 @@ class LoginAdapter(private val context: Context, private val onSuccess: () -> Un
             Toast.makeText(context, "Email and Password can't be blank", Toast.LENGTH_SHORT).show()
             return
         }
-        if (!email.endsWith("@student.ub.ac.id")) {
-            Toast.makeText(context, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
-            return
-        }
         auth()
     }
 
