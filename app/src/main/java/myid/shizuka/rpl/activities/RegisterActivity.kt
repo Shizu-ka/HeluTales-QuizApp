@@ -6,10 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import android.widget.Toast
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import myid.shizuka.rpl.R
 import myid.shizuka.rpl.adapters.RegisterAdapter
 
@@ -33,6 +29,8 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
+//        registerAdapter.redirect("MAIN")
+//        finish()
         registerAdapter = RegisterAdapter(this) {
             navigateToMainActivity()
         }
@@ -50,12 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         registerAdapter.createUser(email, password, confirmPassword)
     }
     private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        val user = Firebase.auth.currentUser
-        user?.sendEmailVerification()?.addOnCompleteListener {
-            Toast.makeText(this, "Verification email has been sent to your email", Toast.LENGTH_SHORT).show()
-        }
-        startActivity(intent)
+        registerAdapter.redirect("MAIN")
         finish()
     }
 }
