@@ -7,7 +7,7 @@
 
 ***You can Install and test Quiz App app from below 👇***
 
-[![Quiz Zone](https://img.shields.io/badge/QuizZone✅-APK-red.svg?style=for-the-badge&logo=android)](url)
+[![Quiz Zone](https://img.shields.io/badge/QuizZone✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Shizu-ka/Quiz-App/releases/)
 
 ## ⚙️ Features
 * Daily New Quizes reated to Java Programming.
