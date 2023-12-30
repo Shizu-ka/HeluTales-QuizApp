@@ -21,7 +21,7 @@
 
 ## 🎥 Preview
 
-<img height="600" width="330" src="gif url" >
+<img height="600" width="330" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmdtdWkwbGJvNWNrcGNhODQ4bDBtOXE3cHo0emlkODV0YXFoMTJmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VN8bOBkiSPT2oPNzMg/giphy.gif" >
 
 
 
