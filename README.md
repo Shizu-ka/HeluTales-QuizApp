@@ -41,7 +41,7 @@
 
 # Package Structure
     
-    com.mohit.quizzone    # Root Package
+    myid.shizuka.rpl        # Root Package
     .
     ├── activites           # For all Activity. 
     |
