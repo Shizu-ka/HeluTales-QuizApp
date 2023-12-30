@@ -21,8 +21,7 @@
 
 ## 🎥 Preview
 
-<img height="600" width="330" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmdtdWkwbGJvNWNrcGNhODQ4bDBtOXE3cHo0emlkODV0YXFoMTJmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VN8bOBkiSPT2oPNzMg/giphy.gif" >
-
+<img height="600" width="330" src="https://github.com/Shizu-ka/Quiz-App/assets/58659139/2b394ab6-84f9-43e9-8a88-f78ef9840d09" >
 
 ## 📸 Screenshots
 
