@@ -24,10 +24,6 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
             return
         }
 
-        if (!email.endsWith("@student.ub.ac.id")) {
-            Toast.makeText(context, "Only @student.ub.ac.id emails are allowed", Toast.LENGTH_SHORT).show()
-            return
-        }
         user = User().apply {
             this.email = email
             this.password = password
@@ -47,7 +43,7 @@ class RegisterAdapter(private val context: Context, private val onSuccess: () ->
                         Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
                         onSuccess.invoke() // Invoke the success callback
                     } else {
-                        Toast.makeText(context, "Error Creating User", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Email or Password is invalid", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
